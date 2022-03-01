@@ -6,4 +6,4 @@ django-heroku
 
 psycopg2
 
-allauth
+django-allauth
