@@ -7,3 +7,5 @@ django-heroku
 psycopg2
 
 django-allauth
+
+dj-database-url 
