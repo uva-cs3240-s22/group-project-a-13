@@ -1,4 +1,5 @@
 {% load socialaccount %}
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -31,7 +32,7 @@
               <button class = 'btn btn-lg btn-primary w-100 mt-3'>Login</button>
           </form>
           <div>
-            <a href="{% provider_login_url 'google' %}"><img class = 'text-center' style="max-width: 250px;" src="static/WordofMouth/images/login-google.png" alt=""></a>
+            <a href="{% provider_login_url 'google' %}"><img class = 'text-center' style="max-width: 250px;" src = "{% static 'WordofMouth/images/login-google.png' %}" alt=""></a>
           </div>
 
       </div>
