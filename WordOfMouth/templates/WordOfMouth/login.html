@@ -1,5 +1,4 @@
 {% load socialaccount %}
-{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,10 +28,10 @@
           <form style = 'max-width: 500px; margin: auto;'>
               <input type="email" id = 'email' class = 'form-control mb-1' placeholder="Email Address" required autofocus>
               <input type="password" id = 'password' class = 'form-control mb-2' placeholder = "Password"> 
-              <button class = 'btn btn-lg btn-primary w-100 mt-3'>Login</button>
+              <button class = 'btn btn-lg btn-primary w-100 mt-3 mb-3'>Login</button>
           </form>
           <div>
-            <a href="{% provider_login_url 'google' %}"><img class = 'text-center' style="max-width: 250px;" src = "{% static 'WordofMouth/images/login-google.png' %}" alt=""></a>
+            <a href="{% provider_login_url 'google' %}">Login with Google</a>
           </div>
 
       </div>
