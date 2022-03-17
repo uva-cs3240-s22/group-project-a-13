@@ -170,6 +170,7 @@ SITE_ID = 6
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+SOCIALACCOUNT_LOGIN_ON_GET=True
 
 # ie if Heroku server
 if 'DATABASE_URL' in os.environ:
