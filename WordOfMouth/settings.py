@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'wordofmoutha-13.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'recipes.apps.RecipesConfig',
     'WordOfMouthApp.apps.WordofmouthappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
