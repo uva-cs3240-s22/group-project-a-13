@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 from .models import Recipe
 from .forms import RecipeForm
+
+
+class homeListView(generic.ListView):
+    model = Recipe
+    template_name = 'recipes/homepage.html'
+    context_object_name = 'recipelist'
 
 def index(request):
     if request.method == 'POST':
@@ -16,13 +23,12 @@ def index(request):
     return render(request, 'recipes/recipeLayout.html', {
             'recipe_form': recipe_form})
 
-def detail(request, question_id):
+def detail(request, recipe_id):
     try:
-        recipe = Recipe.objects.get(pk=question_id)
+        recipe = Recipe.objects.get(pk = recipe_id)
     except Recipe.DoesNotExist:
-        raise Http404("Question does not exist")
+        raise Http404("Recipe does not exist")
     return render(request, 'recipes/detail.html', {'recipe': recipe})
-    #return HttpResponse("You're looking at recipe %s." %question_id)
 
 def result(request):
-    return HttpResponse("Congratulations, your recipe has been submitted!")
+    return render(request, 'recipes/success.html')
