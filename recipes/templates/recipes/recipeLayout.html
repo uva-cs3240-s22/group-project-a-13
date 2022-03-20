@@ -1,0 +1,27 @@
+
+<form action = "{% url 'index' %}" method = "post">
+    {% csrf_token %}
+
+<!-- Name input -->
+    <center><div>
+        <label for="recipe_name">Recipe Name: </label>
+        <input id="recipe_name" type="text" name="recipe_name" />
+    </div></center>
+
+<!-- Ingredient input -->
+    <center><div>
+        <label for="recipe_ingredients">Recipe Ingredients: </label>
+        <input id="recipe_ingredients" type="text" name="recipe_ingredients" />
+    </div></center>
+
+<!-- Instruction input -->
+    <center><div>
+        <label for="recipe_instructions">Recipe Instructions: </label>
+        <input id="recipe_instructions" type="text" name="recipe_instructions" />
+    </div></center>
+
+
+  <!-- Submit button -->
+  <center><button type="submit" class="btn btn-primary">Publish Recipe</button></center>
+
+</form>
