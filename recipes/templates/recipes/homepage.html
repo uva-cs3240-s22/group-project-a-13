@@ -6,15 +6,17 @@
 
 <body>
     <p> Welcome to the recipe homepage! </p>
-    <a href = "/recipes/form" > If you want to submit another recipe, click here! </a>
+    <a href = "/recipes/form" > If you want to submit a recipe, click here! </a>
 
     {% for recipe in recipelist %}
         <div>
-            <a href = '/recipes/' onclick = "location.href = this.href+recipe.id;return false;" > Click here to view {{  recipe.recipe_name  }} </a>
+            <a href = "{% url 'detail' recipe.id %}"> Click here to view {{  recipe.recipe_name  }} </a>
         </div>
     {% empty %}
         <p>No recipes posted yet :(</p>
 {% endfor %}
+
+    <a href = "/recipes/favoritelist" > Favorited Recipes </a>
 
     </body>
 </html>
