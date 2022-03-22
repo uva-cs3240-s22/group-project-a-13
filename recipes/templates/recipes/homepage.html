@@ -7,7 +7,11 @@
 <body>
     <p> Welcome to the recipe homepage! </p>
     <a href = "/recipes/form" > If you want to submit a recipe, click here! </a>
-
+    <br>
+    <a href = "/recipes/short" > If you want to view shorter recipes, click here! </a>
+    <br>
+    <a href = "/recipes/long" > If you want to view longer recipes, click here! </a>
+    <br>
     {% for recipe in recipelist %}
         <div>
             <a href = "{% url 'detail' recipe.id %}"> Click here to view {{  recipe.recipe_name  }} </a>

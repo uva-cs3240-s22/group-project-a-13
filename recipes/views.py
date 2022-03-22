@@ -32,3 +32,13 @@ def detail(request, recipe_id):
 
 def result(request):
     return render(request, 'recipes/success.html')
+
+def short(request):
+    recipelist = [r for r in Recipe.objects.all() if r.is_short()]
+    context = {'recipelist': recipelist}
+    return render(request, 'recipes/shortRecipes.html', context)
+
+def long(request):
+    recipelist = [r for r in Recipe.objects.all() if not r.is_short()]
+    context = {'recipelist': recipelist}
+    return render(request, 'recipes/longRecipes.html', context)

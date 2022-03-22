@@ -1,5 +1,18 @@
-{{ recipe.recipe_name }}
-<br />
-{{ recipe.recipe_ingredients }}
-<br />
-{{ recipe.recipe_instructions }}
+<html>
+<head>
+    {{ recipe.recipe_name }}
+</head>
+<body>
+    <div>
+        {{ recipe.recipe_equipment }}
+    </div>
+    <div class="container" style="display: flex; height: 100px;">
+        <div style="width: 50%;">
+            {{ recipe.recipe_ingredients }}
+        </div>
+        <div style="flex-grow: 1;">
+            {{ recipe.recipe_instructions }}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+    <p> List of Long recipes </p>
+    <a href = "/recipes" > Return to home </a>
+    {% for recipe in recipelist %}
+        <div>
+            <a href = "{% url 'detail' recipe.id %}"> Click here to view {{  recipe.recipe_name  }} </a>
+        </div>
+    {% empty %}
+        <p>No long recipes :(</p>
+{% endfor %}
+
+    </body>
+</html>
+
+</body>
+</html>
