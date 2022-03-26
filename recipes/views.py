@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from .models import Recipe
 from .forms import RecipeForm
-
+import boto3
 
 class homeListView(generic.ListView):
     model = Recipe
@@ -13,7 +13,12 @@ class homeListView(generic.ListView):
 
 def index(request):
     if request.method == 'POST':
-        recipe_form = RecipeForm(request.POST)
+        recipe_form = RecipeForm(request.POST, request.FILES)
+        # file = request.FILES.get('recipe_image', False)
+        # filename = 'x'
+        # s3 = boto3.resource('s3', aws_access_key_id='AKIA6PI7GGPQBJIKMAVI', aws_secret_access_key='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')
+        # bucket = s3.Bucket('wordofmouth-images')
+        # bucket.put_object(Key=filename, Body=file)
         if recipe_form.is_valid():
             recipe_form.save()
             return HttpResponseRedirect(reverse('success'))

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -167,7 +168,14 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 6
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_ACCESS_KEY_ID = 'AKIA6PI7GGPQBJIKMAVI'
+AWS_S3_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'wordofmouth-images'
+AWS_QUERYSTRING_AUTH = False
+
+SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

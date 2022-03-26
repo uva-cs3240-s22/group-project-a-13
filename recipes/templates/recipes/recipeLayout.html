@@ -1,5 +1,5 @@
 
-<form action = "{% url 'index' %}" method = "post">
+<form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data">
     {% csrf_token %}
 
 <!-- Name input -->
@@ -24,6 +24,13 @@
     <center><div>
         <label for="recipe_instructions">Recipe Instructions: </label>
         <input id="recipe_instructions" type="text" name="recipe_instructions" />
+    </div></center>
+
+<!-- Image input -->
+    <center><div>
+
+        <label for="recipe_image">Recipe Image: </label>
+        <input id="recipe_image" type="file" accept="image/*" name="recipe_image" />
     </div></center>
 
 
