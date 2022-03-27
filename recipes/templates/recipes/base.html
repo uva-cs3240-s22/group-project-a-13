@@ -87,13 +87,13 @@
               </button>
            </div>
 
-           <div class="ms-auto" style="text-align: right; margin-right: 45px;>
+           <div class="ms-auto" style="text-align: right; margin-right: 30px;>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                   {% if user.is_authenticated %}
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color:#E3170AFF" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {{ user.username }}
+                          Welcome, {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#">My Recipes</a>
