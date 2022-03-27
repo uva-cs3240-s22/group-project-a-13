@@ -18,7 +18,15 @@
             {{ recipe.recipe_ingredients }}
         <h3>Instructions: </h1>
             {{ recipe.recipe_instructions }}
+        <h3>Instruction List: </h3>
+        <ul>
+            {% for ri in recipe.recipeinstruction_set.all %}
+                <li>{{ ri.instruction_text }}</li>
+            {% endfor %}
+        </ul>
+        <a href = "{% url 'edit' recipe.id %}">Edit Instruction List</a>
     </div>
+
 </body>
 </html>
 
