@@ -33,7 +33,7 @@ def detail(request, recipe_id):
         recipe = Recipe.objects.get(pk = recipe_id)
     except Recipe.DoesNotExist:
         raise Http404("Recipe does not exist")
-    return render(request, 'recipes/detail.html', {'recipe': 'homepage'})
+    return render(request, 'recipes/detail.html', {'recipe': recipe})
 
 def result(request):
     return render(request, 'recipes/success.html')
@@ -47,3 +47,20 @@ def long(request):
     recipelist = [r for r in Recipe.objects.all() if not r.is_short()]
     context = {'recipelist': recipelist}
     return render(request, 'recipes/longRecipes.html', context)
+
+def edit(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return render(request, 'recipes/editInstructions.html', {'recipe': recipe})
+
+def add(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+        text = request.POST['instruction']
+        recipe.recipeinstruction_set.create(instruction_text = text)
+        recipe.num_instructions += 1
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return render(request, 'recipes/detail.html', {'recipe': recipe})

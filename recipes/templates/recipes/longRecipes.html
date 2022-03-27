@@ -6,16 +6,26 @@
 <html>
 <head>
 
+    <style type = "text/css">
+        .recipe_div{
+            padding: 15px 25px 15px 25px;
+            vertical-align: auto;
+        }
+        .recipe_div a{
+            color: black;
+            text-align:start;
+        }
+    </style>
+
 </head>
 
 <body>
-    <p> List of Long recipes </p>
-    <a href = "/recipes" > Return to home </a>
+    <h1>Long recipes </h1>
     {% for recipe in recipelist %}
-        <div>
-            <img src="" alt="">
-            <a href = "{% url 'detail' recipe.id %}"> Click here to view {{  recipe.recipe_name  }} </a>
-        </div>
+    <div class = "recipe_div">
+        <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
+        <a href = "{% url 'detail' recipe.id %}"> {{  recipe.recipe_name  }} </a>
+    </div>
     {% empty %}
         <p>No long recipes :(</p>
 {% endfor %}
