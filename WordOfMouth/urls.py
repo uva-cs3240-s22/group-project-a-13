@@ -21,7 +21,7 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', include('WordOfMouthApp.urls')),
-    path('', TemplateView.as_view(template_name="login.html")),
+    path('', TemplateView.as_view(template_name="homepage.html")),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),

@@ -1,20 +1,25 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
 <html>
 <head>
-    {{ recipe.recipe_name }}
+    <h1 class = "font-weight-bold">
+        {{ recipe.recipe_name }}
+    </h1>
+    <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
 </head>
 <body>
-    <div>
-        {{ recipe.recipe_equipment }}
-    </div>
-    <div class="container" style="display: flex; height: 100px;">
-        <div style="width: 50%;">
-            {{ recipe.recipe_ingredients }}
-        </div>
-        <div style="flex-grow: 1;">
-            {{ recipe.recipe_instructions }}
-        </div>
 
+    <div class = "text-right" id = "recipe-info">
+        <h3>Equipment: </h1>
+            {{ recipe.recipe_equipment }}
+        <h3>Ingredients: </h1>
+            {{ recipe.recipe_ingredients }}
+        <h3>Instructions: </h1>
+            {{ recipe.recipe_instructions }}
     </div>
-        <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
 </body>
 </html>
+
+{% endblock %}

@@ -1,4 +1,6 @@
+{% extends 'recipes/base.html' %}
 
+{% block content %}
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -38,3 +40,5 @@
   <center><button type="submit" class="btn btn-primary">Publish Recipe</button></center>
 
 </form>
+
+{% endblock %}
