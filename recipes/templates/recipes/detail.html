@@ -7,6 +7,9 @@
         <a href = "/recipes" > Home </a>
     </div>
     <div>
+        <a href = "{% url 'edit' recipe.id %}">Edit Instructions</a>
+    </div>
+    <div>
         {{ recipe.recipe_equipment }}
     </div>
     <div class="container" style="display: flex; height: 100px;">
@@ -16,7 +19,13 @@
         <div style="flex-grow: 1;">
             {{ recipe.recipe_instructions }}
         </div>
-
+        <div>
+            <ul>
+                {% for ri in recipe.recipeinstruction_set.all %}
+                    <li> {{ ri.instruction_text }} </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
         <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
 </body>
