@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="en">
  <head>
+
    <!-- Required meta tags -->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,24 +69,46 @@
  
   
    </style>
- 
+
    <title>Word of Mouth</title>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
  </head>
  <body>
-   <div>
- 
-       <nav class = "navbar navbar-nav navbar-expand-md navbar-dark mt-auto" style = "background-color:#A9E5BBFF">
-           <a href="/recipes" class = 'nav navbar-nav navbar-center' style=" font-size: 35px; text-decoration: none; color:#E3170AFF"; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">word of mouth</a>
- 
-           <div class = "login ms-auto" style="text-align: right; margin-right: 10px;">
-               {% if user.is_authenticated %}
-                   <p>Welcome, You are logged in as {{ user.username }}</p>
-                   <a href="/accounts/logout">Logout</a>
-               {% else %}
-                   <a href="{% provider_login_url 'google' %}">Login With Google</a>
-               {% endif %}
+       <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color:#A9E5BBFF">
+           <div class="mx-auto">
+              <a class="navbar-brand" href="/recipes" style=" font-size: 35px; text-decoration: none; color:#E3170AFF"; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Word of mouth</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
            </div>
- 
+
+           <div class="ms-auto" style="text-align: right; margin-right: 45px;>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  {% if user.is_authenticated %}
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color:#E3170AFF" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">My Recipes</a>
+                          <a class="dropdown-item" href="#">Favorited Recipes</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/accounts/logout">Logout</a>
+                        </div>
+                      </li>
+                    {% else %}
+                        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+                    {% endif %}
+                </ul>
+           </div>
+        </nav>
+
            <div class = "wrapper me-auto">
                <nav id = "sidebar">
  
@@ -141,6 +164,5 @@
    </footer>
 </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- 
  </body>
 </html>
