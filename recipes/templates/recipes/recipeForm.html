@@ -1,6 +1,13 @@
 {% extends 'recipes/base.html' %}
 
 {% block content %}
+<style>
+    textarea {
+        vertical-align: middle;
+        }
+
+</style>
+
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -9,24 +16,28 @@
         <label for="recipe_name">Recipe Name: </label>
         <input id="recipe_name" type="text" name="recipe_name" />
     </div></center>
+    <br>
 
 <!-- Ingredient input -->
     <center><div>
         <label for="recipe_ingredients">Recipe Ingredients: </label>
-        <input id="recipe_ingredients" type="text" name="recipe_ingredients" />
+        <textarea id = "recipe_ingredients" name="recipe_instructions" cols="40" rows="2"></textarea>
     </div></center>
+    <br>
 
 <!-- Equipment input -->
 <center><div>
     <label for="recipe_equipment">Recipe Equipment: </label>
-    <input id="recipe_equipment" type="text" name="recipe_equipment" />
+        <textarea id = "recipe_equipment" name="recipe_instructions" cols="40" rows="2"></textarea>
 </div></center>
+    <br>
 
 <!-- Instruction input -->
-    <center><div>
+    <center><div class = "labels">
         <label for="recipe_instructions">Recipe Instructions: </label>
-        <input id="recipe_instructions" type="text" name="recipe_instructions" />
+        <textarea id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5"></textarea>
     </div></center>
+    <br>
 
 <!-- Image input -->
     <center><div>
@@ -34,7 +45,7 @@
         <label for="recipe_image">Recipe Image: </label>
         <input id="recipe_image" type="file" accept="image/*" name="recipe_image" />
     </div></center>
-
+    <br>
 
   <!-- Submit button -->
   <center><button type="submit" class="btn btn-primary">Publish Recipe</button></center>
