@@ -7,6 +7,7 @@ class Recipe(models.Model):
     recipe_instructions = models.CharField(max_length = 1000, default = '')
     recipe_image = models.ImageField(default='', upload_to='media/')
     num_instructions = models.IntegerField(default = 0)
+   
     def __str__(self):
         return self.recipe_name
 

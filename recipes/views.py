@@ -48,12 +48,20 @@ def long(request):
     context = {'recipelist': recipelist}
     return render(request, 'recipes/longRecipes.html', context)
 
-def edit(request, recipe_id):
+def fork(request, recipe_id):
     try:
         recipe = Recipe.objects.get(pk = recipe_id)
     except Recipe.DoesNotExist:
         raise Http404("Recipe does not exist")
-    return render(request, 'recipes/editInstructions.html', {'recipe': recipe})
+    if request.method == 'POST':
+        recipe_form = RecipeForm(request.POST, request.FILES)
+        if recipe_form.is_valid():
+            recipe_form.save()
+            return HttpResponseRedirect(reverse('success'))
+    else:
+        recipe_form = RecipeForm()
+
+    return render(request, 'recipes/forkRecipe.html', {'recipe': recipe})
 
 def add(request, recipe_id):
     try:

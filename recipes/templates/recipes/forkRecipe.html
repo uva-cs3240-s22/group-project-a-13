@@ -8,28 +8,28 @@
 <!-- Name input -->
     <center><div>
         <label for="recipe_name">Recipe Name: </label>
-        <input id="recipe_name" type="text" name="recipe_name" />
+        <input id="recipe_name" type="text" name="recipe_name" value = {{recipe.recipe_name}}>
     </div></center>
     <br>
 
 <!-- Ingredient input -->
     <center><div>
         <label for="recipe_ingredients">Recipe Ingredients: </label>
-        <input type = "text" id = "recipe_ingredients" name="recipe_ingredients"/>
+        <input type = "text" id = "recipe_ingredients" name="recipe_ingredients" value = {{recipe.recipe_ingredients}}>
     </div></center>
     <br>
 
 <!-- Equipment input -->
 <center><div>
     <label for="recipe_equipment">Recipe Equipment: </label>
-        <input type = "text" id = "recipe_equipment" name="recipe_equipment"/>
+        <input type = "text" id = "recipe_equipment" name="recipe_equipment" value = {{recipe.recipe_equipment}}>
 </div></center>
     <br>
 
 <!-- Instruction input -->
     <center><div class = "labels">
         <label for="recipe_instructions">Recipe Instructions: </label>
-        <input type = "text" id = "recipe_instructions" name="recipe_instructions"/>
+        <input type = "text" id = "recipe_instructions" name="recipe_instructions" value = {{recipe.recipe_instructions}}>
     </div></center>
     <br>
 
@@ -37,7 +37,7 @@
     <center><div>
 
         <label for="recipe_image">Recipe Image: </label>
-        <input id="recipe_image" type="file" accept="image/*" name="recipe_image" />
+        <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
     </div></center>
     <br>
 
