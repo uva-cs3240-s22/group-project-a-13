@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -29,11 +29,19 @@ def index(request):
             'recipe_form': recipe_form})
 
 def detail(request, recipe_id):
+    recipe = Recipe.objects.get(pk=recipe_id)
+    is_favorited = False
+    if recipe.favorites.filter(id=request.user.id).exists():
+        is_favorited = True
+    context = {
+        'recipe': recipe,
+        'is_favorited': is_favorited
+    }
     try:
         recipe = Recipe.objects.get(pk = recipe_id)
     except Recipe.DoesNotExist:
         raise Http404("Recipe does not exist")
-    return render(request, 'recipes/detail.html', {'recipe': recipe})
+    return render(request, 'recipes/detail.html', context)
 
 def result(request):
     return render(request, 'recipes/success.html')
@@ -72,3 +80,20 @@ def add(request, recipe_id):
     except Recipe.DoesNotExist:
         raise Http404("Recipe does not exist")
     return render(request, 'recipes/detail.html', {'recipe': recipe})
+
+def myrecipes(request):
+    return render(request, 'recipes/myRecipes.html')
+
+def favorited_list(request):
+    return render(request, 'recipes/favoritedRecipes.html')
+
+def favorite_recipe(request):
+    recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
+    is_favorited = False
+    if recipe.favorites.filter(id=request.user.id).exists():
+        recipe.favorites.remove(request.user)
+        is_favorited = False
+    else:
+        recipe.favorites.add(request.user)
+        is_favorited = True
+    return HttpResponseRedirect(recipe.get_absolute_url())
