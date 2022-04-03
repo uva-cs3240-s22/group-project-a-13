@@ -25,6 +25,15 @@
             {% endfor %}
         </ul>
         <a href = "{% url 'fork' recipe.id %}">Fork Recipe</a>
+        </br>
+        <form action="{% url 'favorite_recipe' %}" method="post">
+            {% csrf_token %}
+            {% if is_favorited %}
+                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:gray">Unfavorite</button>
+            {% else %}
+                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary">Favorite</button>
+            {% endif %}
+        </form>
     </div>
 
 </body>
