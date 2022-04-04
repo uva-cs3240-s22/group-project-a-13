@@ -85,7 +85,10 @@ def myrecipes(request):
     return render(request, 'recipes/myRecipes.html')
 
 def favorited_list(request):
-    return render(request, 'recipes/favoritedRecipes.html')
+    user = request.user
+    favorite_recipes = user.favorites.all()
+    context = {'favorite_recipes': favorite_recipes}
+    return render(request, 'recipes/favoritedRecipes.html',context)
 
 def favorite_recipe(request):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
