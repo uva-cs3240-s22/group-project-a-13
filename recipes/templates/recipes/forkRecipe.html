@@ -2,36 +2,43 @@
 
 {% block content %}
 
-<form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data">
+<form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
     {% csrf_token %}
 
 <!-- Name input -->
     <center><div>
         <label for="recipe_name">Recipe Name: </label>
-        <input id="recipe_name" type="text" name="recipe_name" value = {{recipe.recipe_name}}>
+        <input id="recipe_name" type="text" name="recipe_name" value = "{{recipe.recipe_name}}">
     </div></center>
     <br>
 
 <!-- Ingredient input -->
     <center><div>
         <label for="recipe_ingredients">Recipe Ingredients: </label>
-        <input type = "text" id = "recipe_ingredients" name="recipe_ingredients" value = {{recipe.recipe_ingredients}}>
+        <textarea form = "recipeform" id = "recipe_ingredients" name="recipe_ingredients" cols="40" rows="2">{{recipe.recipe_ingredients}}</textarea>
     </div></center>
     <br>
 
 <!-- Equipment input -->
 <center><div>
     <label for="recipe_equipment">Recipe Equipment: </label>
-        <input type = "text" id = "recipe_equipment" name="recipe_equipment" value = {{recipe.recipe_equipment}}>
+        <textarea form = "recipeform" id = "recipe_equipment" name="recipe_equipment" cols="40" rows="2">{{recipe.recipe_equipment}}</textarea>
 </div></center>
     <br>
 
 <!-- Instruction input -->
     <center><div class = "labels">
         <label for="recipe_instructions">Recipe Instructions: </label>
-        <input type = "text" id = "recipe_instructions" name="recipe_instructions" value = {{recipe.recipe_instructions}}>
+        <textarea form = "recipeform" id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5">{{recipe.recipe_instructions}}</textarea>
     </div></center>
     <br>
+
+<!-- Instruction input -->
+    <center><div class = "labels">
+        <label hidden for="recipe_reference">Recipe Reference: </label>
+        <input hidden type = "number" id = "recipe_reference" name="recipe_reference" value = {{recipe.id}}>
+    </div></center>
+
 
 <!-- Image input -->
     <center><div>

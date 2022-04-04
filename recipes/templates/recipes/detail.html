@@ -12,6 +12,11 @@
 <body>
 
     <div class = "text-right" id = "recipe-info">
+
+        {% if recipe.recipe_reference %}
+        <a href = "{% url 'detail' recipe.recipe_reference %}">This is a forked recipe. View the original recipe here</a>
+        {% endif %}
+
         <h3>Equipment: </h1>
             {{ recipe.recipe_equipment }}
         <h3>Ingredients: </h1>
