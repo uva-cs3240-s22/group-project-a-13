@@ -23,7 +23,7 @@
     <h1>Favorite Recipes </h1>
     {% for recipe in favorite_recipes %}
         <div class = "recipe_div">
-            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }} " width = "150" height = "150"/>
             <a href = "{% url 'detail' recipe.id %}"> {{  recipe.recipe_name  }} </a>
         </div>
     {% empty %}
