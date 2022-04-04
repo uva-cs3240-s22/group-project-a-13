@@ -1,6 +1,7 @@
 {% extends 'recipes/base.html' %}
 
 {% block content %}
+{% load socialaccount %}
 
 <html>
 <head>
@@ -31,6 +32,7 @@
         </ul>
         <a href = "{% url 'fork' recipe.id %}">Fork Recipe</a>
         </br>
+        {% if user.is_authenticated %}
         <form action="{% url 'favorite_recipe' %}" method="post">
             {% csrf_token %}
             {% if is_favorited %}
@@ -39,6 +41,9 @@
                 <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary">Favorite</button>
             {% endif %}
         </form>
+        {% else %}
+            <a class="btn btn-primary" href="{% provider_login_url 'google' %}">Favorite</a>
+        {% endif %}
     </div>
 
 </body>
