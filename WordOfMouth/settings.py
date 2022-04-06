@@ -186,7 +186,7 @@ if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES = {'default': dj_database_url.config()}
 
-
+ON_HEROKU = os.environ.get('ON_HEROKU')
 if ON_HEROKU:
     SECURE_SSL_REDIRECT = True
 else:
