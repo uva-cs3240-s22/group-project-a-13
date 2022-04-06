@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <form action = "{% url 'add_i' recipe.id %}" method = "post">
+        {% csrf_token %}
+        <textarea id = "ingredient" name="ingredient" value = "{{ this.value }}" cols="40" rows="2"></textarea>
+        <br>
+        <textarea id = "quantity" name="quantity" value = "{{ this.value }}" cols="40" rows="2"></textarea>
+        <br>
+        <input type = "submit" value = "Add Ingredient">
+    </form>
+        <a href = "{% url 'detail' recipe.id %}">Cancel</a>
+</body>
+</html>
+
+</body>
+</html>

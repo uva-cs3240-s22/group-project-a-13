@@ -8,6 +8,10 @@
     <h1 class = "font-weight-bold">
         {{ recipe.recipe_name }}
     </h1>
+    <h3>Description: </h3>
+    <p>{{ recipe.recipe_description }}</p>
+    <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a>
+    <br>
     <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
 </head>
 <body>
@@ -18,18 +22,37 @@
         <a href = "{% url 'detail' recipe.recipe_reference %}">This is a forked recipe. View the original recipe here</a>
         {% endif %}
 
-        <h3>Equipment: </h1>
-            {{ recipe.recipe_equipment }}
-        <h3>Ingredients: </h1>
-            {{ recipe.recipe_ingredients }}
-        <h3>Instructions: </h1>
-            {{ recipe.recipe_instructions }}
+        <h3>Equipment: </h3>
+            <!-- {{ recipe.recipe_equipment }} -->
+        <ol>
+            {% for re in recipe.recipeequipment_set.all %}
+                <li>{{ re.equipment_text }}</li>
+                <a href = "{% url 'delete_equipment' re.id recipe.id %}">Delete</a>
+            {% endfor %}
+        </ol>
+        <a href = "{% url 'add_equipment' recipe.id %}">Add Equipment</a>
+        <h3>Ingredients: </h3>
+            <!-- {{ recipe.recipe_ingredients }} -->
+        <!-- <h3>Instructions: </h1>
+            {{ recipe.recipe_instructions }} -->
+        <ol>
+            {% for ri in recipe.recipeingredient_set.all %}
+                <li>{{ ri.ingredient_text }} - {{ ri.ingredient_quantity }}</li>
+                <a href = "{% url 'delete_ingredient' ri.id recipe.id %}">Delete</a>
+                <br>
+            {% endfor %}
+        </ol>
+        <a href = "{% url 'add_ingredient' recipe.id %}">Add Ingredient</a>
         <h3>Instruction List: </h3>
-        <ul>
+        <ol>
             {% for ri in recipe.recipeinstruction_set.all %}
                 <li>{{ ri.instruction_text }}</li>
+                <a href = "{% url 'delete_instruction' ri.id recipe.id %}">Delete</a>
+                <br>
             {% endfor %}
-        </ul>
+        </ol>
+        <a href = "{% url 'add_instruction' recipe.id %}">Add Instruction</a>
+        <br>
         <a href = "{% url 'fork' recipe.id %}">Fork Recipe</a>
         </br>
         {% if user.is_authenticated %}

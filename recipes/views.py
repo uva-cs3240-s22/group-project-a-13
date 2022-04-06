@@ -1,8 +1,9 @@
+from reprlib import recursive_repr
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from .models import Recipe
+from .models import Recipe, RecipeInstruction, RecipeEquipment, RecipeIngredient
 from .forms import RecipeForm
 import boto3
 
@@ -79,10 +80,91 @@ def add(request, recipe_id):
         recipe = Recipe.objects.get(pk = recipe_id)
         text = request.POST['instruction']
         recipe.recipeinstruction_set.create(instruction_text = text)
-        recipe.num_instructions += 1
     except Recipe.DoesNotExist:
         raise Http404("Recipe does not exist")
-    return render(request, 'recipes/detail.html', {'recipe': recipe})
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def add_e(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+        text = request.POST['equipment']
+        recipe.recipeequipment_set.create(equipment_text = text)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def add_i(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+        text = request.POST['ingredient']
+        q = request.POST['quantity']
+        recipe.recipeingredient_set.create(ingredient_text = text, ingredient_quantity = q)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def add_instruction(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return render(request, 'recipes/addInstruction.html', {'recipe': recipe})
+
+def add_equipment(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return render(request, 'recipes/addEquipment.html', {'recipe': recipe})
+
+def add_ingredient(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Recipe does not exist")
+    return render(request, 'recipes/addIngredient.html', {'recipe': recipe})
+
+def delete_instruction(request, instruction_id, recipe_id):
+    try:
+        recipe_instruction = RecipeInstruction.objects.get(pk = instruction_id)
+        recipe_instruction.delete()
+    except RecipeInstruction.DoesNotExist:
+        raise Http404("Something went wrong")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def delete_equipment(request, equipment_id, recipe_id):
+    try:
+        recipe_equipment = RecipeEquipment.objects.get(pk = equipment_id)
+        recipe_equipment.delete()
+    except RecipeEquipment.DoesNotExist:
+        raise Http404("Something went wrong")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+
+def delete_ingredient(request, ingredient_id, recipe_id):
+    try:
+        recipe_ingredient = RecipeIngredient.objects.get(pk = ingredient_id)
+        recipe_ingredient.delete()
+    except RecipeIngredient.DoesNotExist:
+        raise Http404("Something went wrong")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def edit_description(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Something went wrong")
+    return render(request, 'recipes/editDescription.html', {'recipe': recipe})
+
+def edit_d(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+        new_description = request.POST['description']
+        recipe.recipe_description = new_description
+        recipe.save()
+    except Recipe.DoesNotExist:
+        raise Http404("Something went wrong")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
 
 def myrecipes(request):
     return render(request, 'recipes/myRecipes.html')
