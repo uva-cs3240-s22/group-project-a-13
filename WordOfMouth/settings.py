@@ -185,3 +185,11 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES = {'default': dj_database_url.config()}
+
+
+if ON_HEROKU:
+    SECURE_SSL_REDIRECT = True
+else:
+    SECURE_SSL_REDIRECT = False
+
+    
