@@ -65,6 +65,9 @@ def fork(request, recipe_id):
         recipe_form = RecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
             recipe_form.save()
+            # new_recipe = recipe_form.save(commit=False)
+            # new_recipe.recipe_image = recipe.recipe_image
+            # new_recipe.save()
             return HttpResponseRedirect(reverse('success'))
     else:
         recipe_form = RecipeForm()
