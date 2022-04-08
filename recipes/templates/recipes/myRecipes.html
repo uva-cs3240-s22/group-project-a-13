@@ -20,11 +20,15 @@
 </head>
 
 <body>
-    <h1>My Recipes </h1>
-
-</body>
-</html>
-
+    <h1> My Recipes </h1>
+    {% for recipe in myrecipes_added %}
+        <div class = "recipe_div">
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }} " width = "150" height = "150"/>
+            <a href = "{% url 'detail' recipe.id %}"> {{  recipe.recipe_name  }} </a>
+        </div>
+    {% empty %}
+        <p>No recipes posted </p>
+    {% endfor %}
 </body>
 </html>
 
