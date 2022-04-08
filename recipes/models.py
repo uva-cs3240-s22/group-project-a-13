@@ -11,7 +11,6 @@ class Recipe(models.Model):
     recipe_image = models.ImageField(default='', upload_to='media/')
     recipe_reference = models.IntegerField(default = 0, null = True)
     favorites = models.ManyToManyField(User, related_name="favorites", blank=True)
-    own_recipes = models.ManyToManyField(User, related_name="own_recipes", blank=True)
    
     def __str__(self):
         return self.recipe_name

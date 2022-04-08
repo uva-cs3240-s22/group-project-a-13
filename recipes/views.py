@@ -167,21 +167,10 @@ def edit_d(request, recipe_id):
     return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
 
 def myrecipes(request):
-    user = request.user
-    submitted_recipes = user.own_recipes.all()
+    current_user = request.user
+    submitted_recipes = Recipe.objects.filter(user=current_user)
     context = {'submitted_recipes': submitted_recipes}
     return render(request, 'recipes/myRecipes.html', context)
-
-def myrecipes_added(request):
-    recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
-    ownRecipe = False
-    if recipe.own_recipe.filter(id=request.user.id).exists():
-        recipe.own_recipe.remove(request.user)
-        ownRecipe = False
-    else:
-        recipe.own_recipe.add(request.user)
-        ownRecipe = True
-    return HttpResponseRedirect(recipe.get_absolute_url())
 
 
 def favorited_list(request):
