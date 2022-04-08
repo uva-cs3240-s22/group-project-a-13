@@ -1,168 +1,221 @@
-​​​​{% load static %}
+{% load static %}
 {% load socialaccount %}
- 
 <!doctype html>
 <html lang="en">
- <head>
-
-   <!-- Required meta tags -->
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+   <link href='https://css.gg/search.css' rel='stylesheet'>
+   <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
  
-   <!-- Bootstrap CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ <style type = 'text/css'>
  
-  <style type = 'text/css'>
+       * {
+           font-family: 'Playfair Display';
+               }
  
-       .login a{
-           text-align: right;
-           right: 0;
-           position:relative;
-           text-decoration: none;
-           color: white;
-           justify-content: end;
-       }
-       #sidebar{
-           height:100%;
-           width: 250px;
-           position: fixed;
-           z-index:1;
-           top:0;
-           left:0;
-           background-color: #E3170AFF;
+       html, body {
+           max-width: 100%;
            overflow-x: hidden;
-           padding-top:20px;
-           text-align: left;
+       }
+      
+       .navbar {
+           position: fixed;
+           top: 0;
+           width: 100%;
+           height: 150px;
+       }
+ 
+       #navbar-brand {
+           font-weight: bolder;
+           color:  #D2042D;
+           font-size: 70px;
+           text-decoration: none;
+           text-align: center;
+           position: relative;
+           float: none;
+           display: inline-block;
+       }
+ 
+       .bi:hover {
+           color:black;
+       }
+      .login a{
+          text-align: right;
+          right: 0;
+          position:relative;
+          text-decoration: none;
+          color: white;
+          justify-content: end;
+      }
+ 
+      .btn:focus {
+       outline: none;
+       box-shadow: none;
+       }
+ 
+      #search-icon:hover {
+          color: black;
+      }
+ 
+      #sidebar li {
+          list-style-type: none;
+          padding-bottom: 15px;
+       }
+ 
+       #sidebar a {
+           text-decoration: none;
+           text-align: center;
        }
  
        #sidebar a{
            padding:6px 8px 6px 16px;
-           text-decoration: none;
-           font-size:25px;
-           color: white;
-           display:block;
+          text-decoration: none;
+          font-size:25px;
+          color: white;
+          display:block;
        }
  
-       #sidebar a:hover{
-           color:#A9E5BBFF;
-       }
-       .navbar{
-        top:0;
-        padding-top:0;
-        margin:0;
+       #sidebar a:hover {
+           color: black;
        }
  
-       li {
-           list-style-type: none;
-}
- 
+       .footer {
+           bottom: 0;
+           color: #D2042D
+       }
+    
+      .footer-text{
+          color: white;
+      }
       
-       .footer-text{
-           color: #E3170AFF;
+       .wrapper {
+           display: flex;
+           text-decoration: none;
+           transition: all 0.3s;
        }
  
-       .main{
-           margin-left:260px;
-           padding: 0px 10px;
-           margin-top: 25px;
-       }
+       #sidebar{
+          height:100%;
+          min-width: 300px;
+          max-width: 300px;
+          position: fixed;
+          z-index:1;
+          top:0;
+          left:0;
+          background-color: #D2042D;
+          overflow-x: hidden;
+          padding-top:20px;
+          text-align: left;
+          transition: all 0.3s;
+          left: -30%;
+      }
  
-  
+      #sidebar.active{
+          left: 0;
+      }
+ 
+      #sidebarOpen {
+          float: left;
+      }
+ 
+      #sidebarCollapse {
+          float: right;
+      }
+ 
+      #content {
+       width: 100%;
+       padding: 20px;
+       min-height: 100vh;
+       transition: all 0.3s;
+       margin-left: 260px;
+       margin-top: 160px;
+      }
    </style>
-
-   <title>Word of Mouth</title>
-
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
- </head>
- <body>
-       <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color:#A9E5BBFF">
-           <div class="mx-auto">
-              <a class="navbar-brand" href="/recipes" style=" font-size: 35px; text-decoration: none; color:#E3170AFF"; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Word of mouth</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+ 
+  <title>Word of Mouth</title>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+ 
+</head>
+<body>
+ 
+   <div style = "display: inline-block; width: 100%; position: fixed; top: 0; margin-bottom: 25px;">
+       <nav class="navbar navbar-expand-lg" style = "background-color:white">
+           <div class = "ms-auto">
+               <button type = "button" id = "sidebarOpen" class = "btn shadow-none" onclick= "toggleMenu()">
+                   <i class = "bi bi-list icon-menu" style="font-size: 3rem; color: darkgray;"></i>
+               </button>
            </div>
-
-           <div class="ms-auto" style="text-align: right; margin-right: 30px;>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                  {% if user.is_authenticated %}
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color:#E3170AFF" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Welcome, {{ user.username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="/recipes/myrecipes">My Recipes</a>
-                          <a class="dropdown-item" href="/recipes/favorited_list">Favorited Recipes</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="/accounts/logout">Logout</a>
-                        </div>
-                      </li>
-                    {% else %}
-                        <a href="{% provider_login_url 'google' %}">Login With Google</a>
-                    {% endif %}
-                </ul>
+           <div class = "mx-auto">
+              <a id="navbar-brand" href="/recipes">Word of Mouth</a>
+           </div>
+           <div class = "me-auto">
+               <a href="search"><i class="bi bi-search fa-5x" style="font-size: 2rem; color:darkgray;"></i></i></a>
            </div>
         </nav>
-
-           <div class = "wrapper me-auto">
-               <nav id = "sidebar">
  
-                   <ul class = "components">
-                       <li>
-                           <a href="/recipes/form">submit recipe</a>
-                       </li>
-                       <li class = "active">
-                           <a href="#recipeSubmenu" data-bs-toggle="collapse" aria-expanded="false" class = "dropdown-toggle">view recipes</a>
-                           <ul class = "collapse" id ="recipeSubmenu">
-                               <li>
-                                   <a href="/recipes/short">short recipes</a>
-                               </li>
-      
-                               <li>
-                                   <a href="/recipes/long">long recipes</a>
-                               </li>
-                           </ul>
-                       </li>
- 
-                   </ul>
-               </nav>
- 
-                   </nav>
-               </div>
-           </div>
- 
-       </nav>
-      
    </div>
+   
  
-   <div id = "content", name="content", class = "main">
-       {% block content %}
-       {% endblock %}
-   </div>
+    <!--- HIDDEN SIDE NAVBAR --->
+    <div class = "wrapper me-auto">
+       <aside class = "nav-sidebar" id = "sidebar">
  
-<div class = "d-flex flex-column min-vh-100" style="font-c">
-   <footer class = "footer-text mt-auto" style = "background-color:#A9E5BBFF;">
-       <div class = "container text-center text-md-left">
-           <div class = "row text-center text-md-left">
-               <div class = "col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-               </div>
-               <div class = "col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                   <h5 class = "text-uppercase mb-4 font-weight-bold">Author</h5>
-                   <p>Copyright ©2022 All rights reserved by:</p>
-                   <p>Group A-13</p>
-               </div>
-               <div class = "col-md-1 col-lg-2 col-xl-2 mx-auto mt-3">
-                   <h5 class = "text-uppercase mb-4 font-weight-bold">Contact Me</h5>
-                   <p>example@virginia.edu</p>
-           </div >
+           <button class = "btn shadow-none" type = "button" id = "sidebarCollapse" onclick="toggleMenu()">
+               <i class="bi bi-x" style="font-size: 2rem; color:white;"></i>
+ 
+           </button>
+         
+           <ul class = "components" style="margin-top: 75px; margin-left: 20px; float: left;">
+             <li>
+                 <a href="/recipes/form">Create recipe</a>
+             </li>
+             <li>
+              <a href="/recipes/myrecipes">My Recipes</a>
+          </li>
+          <li>
+              <a href="/recipes/favorite">Liked Recipes</a>
+             </li>
+         </ul>
+        
+       </aside>
        </div>
+ 
+       <script type = "text/javascript">
+           function toggleMenu(){
+               document.getElementById('sidebar').classList.toggle('active');
+ 
+           }
+       </script>
+ 
+ 
+ 
+  <div id = "content", name="content", class = "main">
+      {% block content %}
+      {% endblock %}
+  </div>
+ 
+  <section class="">
+   <!-- Footer -->
+   <footer class="text-center text-white" style="background-color: #D2042D;">
+     <!-- Copyright -->
+     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+       © 2022 Copyright: Group A-13
+     </div>
+     <!-- Copyright -->
    </footer>
-</div>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- </body>
+   <!-- Footer -->
+ </section>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 </html>
+

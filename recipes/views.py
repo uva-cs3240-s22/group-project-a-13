@@ -28,6 +28,9 @@ def index(request):
 
     return render(request, 'recipes/recipeLayout.html', {
             'recipe_form': recipe_form})
+    
+def search(request):
+    return render(request, 'recipes/search.html')
 
 def detail(request, recipe_id):
     recipe = Recipe.objects.get(pk=recipe_id)
