@@ -156,7 +156,7 @@
            <div class = "right-nav mx-auto">
                 {% load socialaccount %}
                     {% if user.is_authenticated %}
-                        <p>Welcome, {{ user.username }}</p>
+                        <p style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Welcome, {{ user.username }}</p>
                 {% else %}
                     <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Sign In</a>
                 {% endif %}
