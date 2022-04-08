@@ -43,14 +43,6 @@
        .bi:hover {
            color:black;
        }
-      .login a{
-          text-align: right;
-          right: 0;
-          position:relative;
-          text-decoration: none;
-          color: white;
-          justify-content: end;
-      }
  
       .btn:focus {
        outline: none;
@@ -58,6 +50,10 @@
        }
  
       #search-icon:hover {
+          color: black;
+      }
+
+      .right-nav a:hover{
           color: black;
       }
  
@@ -149,15 +145,21 @@
  
    <div style = "display: inline-block; width: 100%; position: fixed; top: 0; margin-bottom: 25px;">
        <nav class="navbar navbar-expand-lg" style = "background-color:white">
-           <div class = "ms-auto">
+           <div class = "mx-auto">
                <button type = "button" id = "sidebarOpen" class = "btn shadow-none" onclick= "toggleMenu()">
                    <i class = "bi bi-list icon-menu" style="font-size: 3rem; color: darkgray;"></i>
                </button>
            </div>
-           <div class = "mx-auto">
+           <div class = "text-center mx-auto">
               <a id="navbar-brand" href="/recipes">Word of Mouth</a>
            </div>
-           <div class = "me-auto">
+           <div class = "right-nav mx-auto">
+                {% load socialaccount %}
+                    {% if user.is_authenticated %}
+                        <p>Welcome, {{ user.username }}</p>
+                {% else %}
+                    <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Sign In</a>
+                {% endif %}
                <a href="search"><i class="bi bi-search fa-5x" style="font-size: 2rem; color:darkgray;"></i></i></a>
            </div>
         </nav>

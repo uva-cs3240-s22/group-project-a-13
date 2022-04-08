@@ -8,6 +8,7 @@ urlpatterns = [
     path('success/', views.result ,name = 'success'),
     path('short/', views.short, name = 'short'),
     path('search/', views.search, name = 'search'),
+    path('login/', views.login, name = 'login'),
     path('long/', views.long, name = 'long'),
     path('<int:recipe_id>/fork/', views.fork, name = 'fork'),
     path('<int:recipe_id>/add/', views.add, name = 'add'),

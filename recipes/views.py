@@ -32,6 +32,9 @@ def index(request):
 def search(request):
     return render(request, 'recipes/search.html')
 
+def login(request):
+    return render(request, 'login.html')
+
 def detail(request, recipe_id):
     recipe = Recipe.objects.get(pk=recipe_id)
     is_favorited = False
