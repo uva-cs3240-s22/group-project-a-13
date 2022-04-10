@@ -22,3 +22,31 @@ class TestRecipe(TestCase):
         r = Recipe.objects.create()
         r.recipeinstruction_set.create(instruction_text = 'new instruction')
         self.assertEquals(r.recipeinstruction_set.first().instruction_text, 'new instruction')
+
+    def test_add_equipment(self):
+        r = Recipe.objects.create()
+        r.recipeequipment_set.create(equipment_text = 'new equipment')
+        self.assertIs(r.recipeequipment_set.count(), 1)
+
+    def test_add_equipment2(self):
+        r = Recipe.objects.create()
+        r.recipeequipment_set.create(equipment_text = 'new equipment')
+        self.assertEquals(r.recipeequipment_set.first().equipment_text, 'new equipment')
+
+    def test_add_ingredient(self):
+        r = Recipe.objects.create()
+        r.recipeingredient_set.create(ingredient_text = 'new ingredient', ingredient_quantity = '6')
+        self.assertIs(r.recipeingredient_set.count(), 1)
+
+    def test_add_ingredient2(self):
+        r = Recipe.objects.create()
+        r.recipeingredient_set.create(ingredient_text = 'new ingredient', ingredient_quantity = '6')
+        self.assertEquals(r.recipeingredient_set.first().ingredient_text, 'new ingredient')
+        self.assertEquals(r.recipeingredient_set.first().ingredient_quantity, '6')
+
+    def test_edit_description(self):
+        r = Recipe.objects.create()
+        r.recipe_description = 'Description 1'
+        self.assertEquals(r.recipe_description, 'Description 1')
+        r.recipe_description = 'Description 2'
+        self.assertEquals(r.recipe_description, 'Description 2')
