@@ -6,57 +6,57 @@
     {% csrf_token %}
 
 <!-- Name input -->
-    <center><div>
+    <div>
         <label for="recipe_name">Recipe Name: </label>
         <input id="recipe_name" type="text" name="recipe_name">
-    </div></center>
+    </div>
     <br>
 
 <!-- Description input -->
-<center><div>
+<div>
     <label for="recipe_description">Recipe Description: </label>
     <textarea form = "recipeform" id = "recipe_description" name="recipe_description" cols="40" rows="2"></textarea>
-</div></center>
+</div>
 <br>
 
 <!-- Ingredient input -->
-    <!-- <center><div>
+    <div>
         <label for="recipe_ingredients">Recipe Ingredients: </label>
         <textarea form = "recipeform" id = "recipe_ingredients" name="recipe_ingredients" cols="40" rows="2"></textarea>
-    </div></center>
-    <br> -->
+    </div>
+    <br> 
 
 <!-- Equipment input -->
-<!-- <center><div>
+ <div>
     <label for="recipe_equipment">Recipe Equipment: </label>
         <textarea form = "recipeform" id = "recipe_equipment" name="recipe_equipment" cols="40" rows="2"></textarea>
-</div></center>
-    <br> -->
+</div>
+    <br> 
 
 <!-- Instruction input -->
-    <!-- <center><div class = "labels">
+     <div class = "labels">
         <label for="recipe_instructions">Recipe Instructions: </label>
         <textarea form = "recipeform" id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5"></textarea>
-    </div></center>
-    <br> -->
+    </div>
+    <br> 
 
 <!-- Instruction input -->
-    <center><div class = "labels">
+    <div class = "labels">
         <label hidden for="recipe_reference">Recipe Reference: </label>
         <input hidden type = "number" id = "recipe_reference" name="recipe_reference" value = "0">
-    </div></center>
+    </div>
 
 
 <!-- Image input -->
-    <center><div>
+    <div>
 
         <label for="recipe_image">Recipe Image: </label>
         <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
-    </div></center>
+    </div>
     <br>
 
   <!-- Submit button -->
-  <center><button type="submit" class="btn btn-primary">Publish Recipe</button></center>
+  <button type="submit" class="btn btn-primary">Publish Recipe</button>
 
 </form>
 
