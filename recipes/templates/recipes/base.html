@@ -74,6 +74,14 @@
           color: white;
           display:block;
        }
+
+       #sidebar p{
+           padding:6px 8px 6px 16px;
+          text-decoration: none;
+          font-size:25px;
+          color: black;
+          display:block;
+       }
  
        #sidebar a:hover {
            color: black;
@@ -122,7 +130,7 @@
           float: right;
       }
  
-      #content {
+      .main {
        width: 100%;
        padding: 20px;
        min-height: 100vh;
@@ -152,16 +160,16 @@
            </div>
            <div class = "text-center mx-auto">
               <a id="navbar-brand" href="/recipes">Word of Mouth</a>
-           </div>
+           </div style>
+           {% load socialaccount %}
+           {% if user.is_authenticated %}
+               <p style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Welcome, {{ user.username }}</p>
+            {% else %}
+                <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Sign In</a>
+            {% endif %}
            <div class = "right-nav mx-auto">
-                {% load socialaccount %}
-                    {% if user.is_authenticated %}
-                        <p style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Welcome, {{ user.username }}</p>
-                {% else %}
-                    <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Sign In</a>
-                {% endif %}
-               <a href="search"><i class="bi bi-search fa-5x" style="font-size: 2rem; color:darkgray;"></i></i></a>
-           </div>
+           <a href="search"><i class="bi bi-search fa-5x" style="font-size: 2rem; color:darkgray;"></i></i></a>
+       </div>
         </nav>
  
    </div>
@@ -169,34 +177,50 @@
  
     <!--- HIDDEN SIDE NAVBAR --->
     <div class = "wrapper me-auto">
-       <aside class = "nav-sidebar" id = "sidebar">
- 
-           <button class = "btn shadow-none" type = "button" id = "sidebarCollapse" onclick="toggleMenu()">
-               <i class="bi bi-x" style="font-size: 2rem; color:white;"></i>
- 
-           </button>
+        <aside class = "nav-sidebar" id = "sidebar">
+  
+            <button class = "btn shadow-none" type = "button" id = "sidebarCollapse" onclick="toggleMenu()">
+                <i class="bi bi-x" style="font-size: 2rem; color:white;"></i>
+  
+            </button>
+            {% if user.is_authenticated %}
+                <ul class = "components" style="margin-top: 75px; margin-left: 20px; float: left;">
+                <li>
+                    <a href="/recipes/form">Create recipe</a>
+                </li>
+                <li>
+                <a href="/recipes/myrecipes">My Recipes</a>
+            </li>
+            <li>
+                <a href="/recipes/favorited_list">Liked Recipes</a>
+                </li>
+            </ul>
+
+            {% else %}
+                <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; font-size: larger; margin-top: 50px;">Please sign in to access account features below</a>
+                <ul class = "components" style="margin-top: 75px; margin-left: 20px; float: left;">
+                    <li>
+                        <p> Create recipe </p>
+                    </li>
+                    <li>
+                        <p> My Recipes </p>
+                </li>
+                <li>
+                    <p> Favorited Recipes </p>
+                    </li>
+                </ul>
+            {% endif %}
+
          
-           <ul class = "components" style="margin-top: 75px; margin-left: 20px; float: left;">
-             <li>
-                 <a href="/recipes/form">Create recipe</a>
-             </li>
-             <li>
-              <a href="/recipes/myrecipes">My Recipes</a>
-          </li>
-          <li>
-              <a href="/recipes/favorite">Liked Recipes</a>
-             </li>
-         </ul>
-        
-       </aside>
-       </div>
- 
-       <script type = "text/javascript">
-           function toggleMenu(){
-               document.getElementById('sidebar').classList.toggle('active');
- 
-           }
-       </script>
+        </aside>
+        </div>
+  
+        <script type = "text/javascript">
+            function toggleMenu(){
+                document.getElementById('sidebar').classList.toggle('active');
+  
+            }
+        </script>
  
  
  

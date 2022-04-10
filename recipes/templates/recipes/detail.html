@@ -12,11 +12,11 @@
     <p>{{ recipe.recipe_description }}</p>
     <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a>
     <br>
-    <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "250" height = "250"/>
+    <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}"/>
 </head>
 <body>
 
-    <div class = "text-right" id = "recipe-info">
+    <div class = "text-left" id = "recipe-info">
 
         {% if recipe.recipe_reference %}
         <a href = "{% url 'detail' recipe.recipe_reference %}">This is a forked recipe. View the original recipe here</a>
