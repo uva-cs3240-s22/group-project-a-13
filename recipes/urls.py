@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import SearchResultsView
 
 urlpatterns = [
     path('', views.homeListView.as_view(), name = 'homepage'),
@@ -7,7 +8,7 @@ urlpatterns = [
     path('<int:recipe_id>/', views.detail, name = 'detail'),
     path('success/', views.result ,name = 'success'),
     path('short/', views.short, name = 'short'),
-    path('search/', views.search, name = 'search'),
+    path('search/', views.SearchResultsView.as_view(), name = 'search'),
     path('login/', views.login, name = 'login'),
     path('long/', views.long, name = 'long'),
     path('<int:recipe_id>/fork/', views.fork, name = 'fork'),

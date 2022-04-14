@@ -1,1 +1,19 @@
-seach for a recipe here!
+Search for a recipe by name!
+
+<!-- Load icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The form -->
+<form action = "{% url 'search' %}" method = "get" enctype="multipart/form-data" id="searchrecipeform">
+	{% csrf_token %}
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+
+{% for recipe in recipelist %}
+	<br>
+	<a href = "{% url 'detail' recipe.id %}"> {{  recipe.recipe_name  }} </a>
+</br>
+    {% empty %}
+        <p>No recipes found yet...</p>
+{% endfor %}

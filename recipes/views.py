@@ -5,7 +5,9 @@ from django.urls import reverse
 from django.views import generic
 from .models import Recipe, RecipeInstruction, RecipeEquipment, RecipeIngredient
 from .forms import RecipeForm
+from django.views.generic import TemplateView, ListView
 import boto3
+from django.db.models import Q # new
 
 class homeListView(generic.ListView):
     model = Recipe
@@ -29,8 +31,25 @@ def index(request):
     return render(request, 'recipes/recipeLayout.html', {
             'recipe_form': recipe_form})
     
-def search(request):
-    return render(request, 'recipes/search.html')
+# def search(request):
+#     if request.method == 'POST':
+#         recipe = Recipe.objects.get(recipe_name = request.POST)
+#         return render(request, 'recipes/search.html', {'recipe': recipe})
+
+class SearchResultsView(generic.ListView):
+    model = Recipe
+    template_name = 'recipes/search.html'
+    context_object_name = 'recipelist'
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("search", None)
+        if query:
+            object_list = Recipe.objects.filter(
+                Q(recipe_name__icontains=query)
+            )
+            return object_list
+
+    # queryset = Recipe.objects.filter(recipe_name__icontains='pizza') # new
 
 def login(request):
     return render(request, 'login.html')
