@@ -8,7 +8,7 @@ class Recipe(models.Model):
     recipe_ingredients = models.CharField(max_length = 500, default = '')
     recipe_equipment = models.CharField(max_length = 500, default = '')
     recipe_instructions = models.CharField(max_length = 1000, default = '')
-    recipe_image = models.ImageField(default='', upload_to='media/')
+    recipe_image = models.ImageField(default='', upload_to='media/', blank = True)
     recipe_reference = models.IntegerField(default = 0, null = True)
     favorites = models.ManyToManyField(User, related_name="favorites", blank=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
