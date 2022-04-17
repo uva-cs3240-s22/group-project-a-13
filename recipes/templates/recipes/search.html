@@ -1,19 +1,77 @@
-Search for a recipe by name!
+{% extends 'recipes/base.html' %}
 
-<!-- Load icon library -->
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<style type = "text/css">
+
+    .container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 10px;
+        column-gap: 25px;
+        float: left;
+    }
+
+    .cards {
+        margin: 0 auto;
+        max-width: 300px;
+    }
+
+    .card-info a:hover{
+        text-decoration: black;
+        font-size: xx-large;
+        border-bottom: 2px solid red;
+    }
+</style>
+
+<body>
+
+  <!-- Load icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- The form -->
-<form action = "{% url 'search' %}" method = "get" enctype="multipart/form-data" id="searchrecipeform">
-	{% csrf_token %}
-  <input type="text" placeholder="Search.." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+<div class = 'search' style="margin-bottom: 15px;">
 
-{% for recipe in recipelist %}
-	<br>
-	<a href = "{% url 'detail' recipe.id %}"> {{  recipe.recipe_name  }} </a>
-</br>
-    {% empty %}
-        <p>No recipes found yet...</p>
-{% endfor %}
+  <form action = "{% url 'search' %}" method = "get" enctype="multipart/form-data" id="searchrecipeform">
+    {% csrf_token %}
+    <input type="text" placeholder="Search" name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+
+</div>
+
+    <div class = "container">
+        {% for recipe in recipelist %}
+            <div class="card" style="width: 18rem;">
+                <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = '100%' height = '75%' class="card-img-top">
+                <div class="card-body" style= "display: inline-block">
+                    <div class = "card-info" style="float:left">
+                        <a href="{% url 'detail' recipe.id %}" style="text-decoration: none; color:#2d2d2d; font-size:x-large;"> {{recipe.recipe_name}} </a>
+                        <br>
+                        <p style="color: red; margin-top: 5px;">By {{recipe.user}} </p>
+                    </div>
+                    <div style="float: right">
+                        <!--like button here-->
+                    </div>
+                </div>
+            </div>    
+        {% empty %}
+            <p>No recipes match search</p>
+            <div style="height: 100vh;"></div> <!--This is to make sure footer sticks to bottom, not ideal solution need to fix footer-->
+        {% endfor %}
+    </div>
+
+    </body>
+</html>
+
+</body>
+</html>
+
+{% endblock %}
