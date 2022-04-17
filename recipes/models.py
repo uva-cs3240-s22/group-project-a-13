@@ -47,4 +47,4 @@ class RecipeIngredient(models.Model):
     ingredient_quantity = models.CharField(max_length = 100, default = '')
 
     def __str__(self):
-        return self.equipment_text
+        return self.ingredient_text
