@@ -33,6 +33,7 @@
             <h1 class = "font-weight-bold">
                     {{ recipe.recipe_name }}
             </h1>
+            <button onClick="window.print()">Print/Save this recipe</button>
             <h3>Description: </h3>
             <p>{{ recipe.recipe_description }}</p>
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
