@@ -37,7 +37,7 @@
             <h3>Description: </h3>
             <p>{{ recipe.recipe_description }}</p>
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
-            <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a>
+            <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
 
             <div style = "display: inline-block; width: 100%;">
                 <div style="display:float-left">
@@ -87,12 +87,12 @@
             <h3>Instructions: </h3>
             <input type="checkbox" id="vehicle1" name="vehicle1">
             <label for="vehicle1">{{ recipe.recipe_instructions }}</label><br>
-            <h3>Instruction List: </h3>
+            <!-- <h3>Instruction List: </h3>
             <ul>
                 {% for ri in recipe.recipeinstruction_set.all %}
                     <li>{{ ri.instruction_text }}</li>
                 {% endfor %}
-            </ul>
+            </ul> -->
         </div>
     </ul>
 
