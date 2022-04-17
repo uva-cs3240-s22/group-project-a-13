@@ -219,9 +219,6 @@ def edit_recipe(request, recipe_id):
 def myrecipes(request):
     current_user = request.user
     submitted_recipes = Recipe.objects.filter(user_name=current_user)
-    print(current_user)
-    print(Recipe.objects.filter(user_name__icontains=current_user))
-    print(submitted_recipes)
     context = {'submitted_recipes': submitted_recipes}
     return render(request, 'recipes/myRecipes.html', context)
 
