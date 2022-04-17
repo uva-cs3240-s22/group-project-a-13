@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <form action = "{% url 'edit_d' recipe.id %}" method = "post">
+        {% csrf_token %}
+        <h3>Name</h3>
+        <textarea id = "name" name="name" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_name }}</textarea>
+        <h3>Description</h3>
+        <textarea id = "description" name="description" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_description }}</textarea>
+        <h3>Equipment</h3>
+        <textarea id = "equipment" name="equipment" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_equipment }}</textarea>
+        <h3>Ingredients</h3>
+        <textarea id = "ingredient" name="ingredient" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_ingredients }}</textarea>
+        <h3>Instructions</h3>
+        <textarea id = "instruction" name="instruction" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_instructions }}</textarea>
+        <br>
+        <input type = "submit" value = "Save">
+    </form>
+        <a href = "{% url 'detail' recipe.id %}">Cancel</a>
+</body>
+</html>
+
+</body>
+</html>
