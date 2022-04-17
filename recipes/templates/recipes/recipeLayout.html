@@ -5,6 +5,11 @@
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
     {% csrf_token %}
 
+    <div>
+        <label hidden for="user_name">User name: </label>
+        <input hidden id="user_name" type="text" name="user_name" value = {{request.user}}>
+    </div>
+
 <!-- Name input -->
     <div>
         <label for="recipe_name">Recipe Name: </label>

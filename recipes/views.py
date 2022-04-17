@@ -17,11 +17,6 @@ class homeListView(generic.ListView):
 def index(request):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST, request.FILES)
-        # file = request.FILES.get('recipe_image', False)
-        # filename = 'x'
-        # s3 = boto3.resource('s3', aws_access_key_id='AKIA6PI7GGPQBJIKMAVI', aws_secret_access_key='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')
-        # bucket = s3.Bucket('wordofmouth-images')
-        # bucket.put_object(Key=filename, Body=file)
         if recipe_form.is_valid():
             recipe_form.save()
             return HttpResponseRedirect(reverse('success'))
@@ -223,7 +218,10 @@ def edit_recipe(request, recipe_id):
 
 def myrecipes(request):
     current_user = request.user
-    submitted_recipes = Recipe.objects.filter(user=current_user)
+    submitted_recipes = Recipe.objects.filter(user_name=current_user)
+    print(current_user)
+    print(Recipe.objects.filter(user_name__icontains=current_user))
+    print(submitted_recipes)
     context = {'submitted_recipes': submitted_recipes}
     return render(request, 'recipes/myRecipes.html', context)
 
