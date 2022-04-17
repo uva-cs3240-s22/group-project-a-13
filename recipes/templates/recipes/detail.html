@@ -2,59 +2,97 @@
 
 {% block content %}
 {% load socialaccount %}
+{% load static %}
 
 <html>
+
+
+<style type = 'text/css'>
+       .right{
+           padding-left: 600px;
+           width: 1000px;
+           height: 415px;
+       }
+</style>
+
+
 <head>
-    <h1 class = "font-weight-bold">
-        {{ recipe.recipe_name }}
-    </h1>
-    <h3>Description: </h3>
-    <p>{{ recipe.recipe_description }}</p>
-    <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
-    <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "250" height = "250" />
-    <br>
-    <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
-        <br>
-        <input type = "submit" value = "Update Image">
-    </form>
+
+    <ul style = "display: inline-block; width: 100%;">
+        <div style="float: left">
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "575" height = "415" />
+            <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
+                <br>
+                <input type = "submit" value = "Update Image">
+            </form>
+        </div>
+
+        <div class="right">
+            <h1 class = "font-weight-bold">
+                    {{ recipe.recipe_name }}
+            </h1>
+            <h3>Description: </h3>
+            <p>{{ recipe.recipe_description }}</p>
+            <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
+            <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a>
+
+            <div style = "display: inline-block; width: 100%;">
+                <div style="display:float-left">
+                    <a href = "{% url 'fork' recipe.id %}"><img src="{% static 'recipes/images/fork-logo.jpeg' %}"style="max-width:15%;" ></a>
+                </div>
+                <div style="color: #D2042D;">
+                    <p>Fork this recipe</p>
+                </div>
+            </div>
+
+            {% if recipe.recipe_reference %}
+                <a href = "{% url 'detail' recipe.recipe_reference %}">Forked! View the original recipe here</a>
+            {% endif %}
+        </div>
+
+    </ul>
     
 </head>
 <body>
 
-    <div class = "text-left" id = "recipe-info">
-
-        {% if recipe.recipe_reference %}
-        <a href = "{% url 'detail' recipe.recipe_reference %}">This is a forked recipe. View the original recipe here</a>
-        {% endif %}
-
-        <h3>Equipment: </h1>
-             {{ recipe.recipe_equipment }}
-         <h3>Ingredients: </h1>
+    <ul id = "recipe-info" style = "display: inline-block; width: 100%;">
+        <div style="float: left; width: 400px;">
+            <h3>Equipment: </h3>
+            {{ recipe.recipe_equipment }}
+            <h3>Ingredients: </h3>
             {{ recipe.recipe_ingredients }}
-        <h3>Instructions: </h1>
-            {{ recipe.recipe_instructions }}
-        <br>
-        <!-- <h3>Instruction List: </h3> -->
-        <!-- <ul>
-            {% for ri in recipe.recipeinstruction_set.all %}
-                <li>{{ ri.instruction_text }}</li>
-            {% endfor %}
-        </ul> -->
-        <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
-        <br>
-        <a href = "{% url 'fork' recipe.id %}">Fork Recipe</a>
-        </br>
-        <form action="{% url 'favorite_recipe' %}" method="post">
-            {% csrf_token %}
-            {% if is_favorited %}
-                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:gray">Unfavorite</button>
-            {% else %}
-                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary">Favorite</button>
-            {% endif %}
-        </form>
-    </div>
+            <br>
+            <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
+            <br>
+            <form action="{% url 'favorite_recipe' %}" method="post">
+                {% csrf_token %}
+                {% if is_favorited %}
+                    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:gray">Unfavorite</button>
+                {% else %}
+                    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:#D2042D">Favorite</button>
+                {% endif %}
+            </form>
+        </div>
+
+        <div style="white-space: normal; padding-left: 300px; width: 1000px;">
+             <!-- <h3>Instruction List: </h3> -->
+                <!-- <ul>
+                    {% for ri in recipe.recipeinstruction_set.all %}
+                        <li>{{ ri.instruction_text }}</li>
+                    {% endfor %}
+                </ul> -->
+            <h3>Instructions: </h3>
+                {{ recipe.recipe_instructions }}
+            <h3>Instruction List: </h3>
+            <ul>
+                {% for ri in recipe.recipeinstruction_set.all %}
+                    <li>{{ ri.instruction_text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </ul>
 
 </body>
 </html>
