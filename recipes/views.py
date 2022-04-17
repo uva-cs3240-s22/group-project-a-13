@@ -188,12 +188,38 @@ def edit_description(request, recipe_id):
 def edit_d(request, recipe_id):
     try:
         recipe = Recipe.objects.get(pk = recipe_id)
+        new_name = request.POST['name']
         new_description = request.POST['description']
+        new_equipment = request.POST['equipment']
+        new_ingredient = request.POST['ingredient']
+        new_instruction = request.POST['instruction']
+        recipe.recipe_name = new_name
         recipe.recipe_description = new_description
+        recipe.recipe_equipment = new_equipment
+        recipe.recipe_ingredients = new_ingredient
+        recipe.recipe_instructions = new_instruction
         recipe.save()
     except Recipe.DoesNotExist:
         raise Http404("Something went wrong")
     return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def edit_image(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+        if 'recipe_image' in request.FILES:
+            new_image = request.FILES['recipe_image']
+            recipe.recipe_image = new_image
+            recipe.save()
+    except Recipe.DoesNotExist:
+        raise Http404("Something went wrong")
+    return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
+
+def edit_recipe(request, recipe_id):
+    try:
+        recipe = Recipe.objects.get(pk = recipe_id)
+    except Recipe.DoesNotExist:
+        raise Http404("Something went sus")
+    return render(request, 'recipes/editRecipe.html', {'recipe': recipe})
 
 def myrecipes(request):
     current_user = request.user

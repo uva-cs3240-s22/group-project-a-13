@@ -10,9 +10,16 @@
     </h1>
     <h3>Description: </h3>
     <p>{{ recipe.recipe_description }}</p>
-    <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a>
+    <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
+    <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "250" height = "250" />
     <br>
-        <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "250" height = "250" />
+    <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
+        <br>
+        <input type = "submit" value = "Update Image">
+    </form>
+    
 </head>
 <body>
 
@@ -28,12 +35,15 @@
             {{ recipe.recipe_ingredients }}
         <h3>Instructions: </h1>
             {{ recipe.recipe_instructions }}
-        <h3>Instruction List: </h3>
-        <ul>
+        <br>
+        <!-- <h3>Instruction List: </h3> -->
+        <!-- <ul>
             {% for ri in recipe.recipeinstruction_set.all %}
                 <li>{{ ri.instruction_text }}</li>
             {% endfor %}
-        </ul>
+        </ul> -->
+        <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
+        <br>
         <a href = "{% url 'fork' recipe.id %}">Fork Recipe</a>
         </br>
         <form action="{% url 'favorite_recipe' %}" method="post">
