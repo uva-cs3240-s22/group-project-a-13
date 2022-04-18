@@ -7,13 +7,24 @@
 <head>
 
     <style type = "text/css">
-        .recipe_div{
-            padding: 15px 25px 15px 25px;
-            vertical-align: auto;
-        }
-        .recipe_div a{
-            color: black;
-            text-align:start;
+          .container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 10px;
+        column-gap: 25px;
+        float: left;
+    }
+
+    .cards {
+        margin: 0 auto;
+        max-width: 300px;
+    }
+
+    .card-info a:hover{
+        text-decoration: black;
+        font-size: xx-large;
+        border-bottom: 2px solid red;
         }
     </style>
 
