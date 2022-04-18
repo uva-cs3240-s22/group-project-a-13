@@ -87,15 +87,6 @@
        #sidebar a:hover {
            color: black;
        }
- 
-       .footer {
-           bottom: 0;
-           color: #D2042D;
-       }
-    
-      .footer-text{
-          color: white;
-      }
       
        .wrapper {
            display: flex;
@@ -139,7 +130,10 @@
        margin-left: 270px;
        margin-top: 160px;
        overflow-y: scroll;
+       height: 100%;
+       margin-bottom: 50px;
       }
+
    </style>
  
   <title>Word of Mouth</title>
@@ -151,7 +145,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
  
 </head>
-<body>
+<body class = 'd-flex flex-column min-vh-100' style="position: relative;">
  
    <div style = "display: inline-block; width: 100%; position: fixed; top: 0; margin-bottom: 25px; z-index: 1;">
        <nav class="navbar navbar-expand-lg" style = "background-color:white">
@@ -238,7 +232,7 @@
 
    <!-- Footer -->
    <div class="">
-    <footer class="text-center text-white" style= "width:100%; bottom: 0; background-color: #D2042D;">
+    <footer class="text-center text-white" style= "position: absolute; margin-top: auto; width:100%; bottom: 0; background-color: #D2042D;">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2022 Copyright: Group A-13
