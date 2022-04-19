@@ -69,8 +69,10 @@
             <h3>Ingredients: </h3>
             {{ recipe.recipe_ingredients }}
             <br>
-            <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
-            <br>
+            {% if request.user.username == recipe.user_name %}
+                <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
+            {% else %}
+            {% endif %}
             <form action="{% url 'favorite_recipe' %}" method="post">
                 {% csrf_token %}
                 {% if is_favorited %}
