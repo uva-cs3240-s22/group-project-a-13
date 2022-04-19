@@ -40,7 +40,11 @@ class SearchResultsView(generic.ListView):
         query = self.request.GET.get("search", None)
         if query:
             object_list = Recipe.objects.filter(
-                Q(recipe_name__icontains=query)
+                Q(recipe_name__icontains=query) |
+                Q(recipe_description__icontains=query) |
+                Q(recipe_ingredients__icontains=query) |
+                Q(recipe_equipment__icontains=query) |
+                Q(recipe_instructions__icontains=query)
             )
             return object_list
 
