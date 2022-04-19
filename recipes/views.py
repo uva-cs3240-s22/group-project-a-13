@@ -210,11 +210,15 @@ def edit_image(request, recipe_id):
     return HttpResponseRedirect(reverse('detail', kwargs = {'recipe_id': recipe_id}))
 
 def edit_recipe(request, recipe_id):
-    try:
-        recipe = Recipe.objects.get(pk = recipe_id)
-    except Recipe.DoesNotExist:
-        raise Http404("Something went sus")
-    return render(request, 'recipes/editRecipe.html', {'recipe': recipe})
+        try:
+            recipe = Recipe.objects.get(pk = recipe_id)
+            if request.user.username == recipe.user_name:
+                return render(request, 'recipes/editRecipe.html', {'recipe': recipe})
+            else:
+                raise Http404("You are not authorized to edit this recipe id. Try editing one of your own recipes.")
+        except Recipe.DoesNotExist:
+            raise Http404("You tried to find a recipe that does not exist.")
+
 
 def myrecipes(request):
     current_user = request.user
