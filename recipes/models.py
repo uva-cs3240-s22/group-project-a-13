@@ -12,8 +12,6 @@ class Recipe(models.Model):
     recipe_reference = models.IntegerField(default = 0, null = True)
     favorites = models.ManyToManyField(User, related_name="favorites", blank=True)
     user_name = models.CharField(max_length = 50, default = '')
-    # submitted = models.ManyToManyField(User, related_name="submitted", blank=True)
-    # auth_user = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
    
     def __str__(self):
         return self.recipe_name

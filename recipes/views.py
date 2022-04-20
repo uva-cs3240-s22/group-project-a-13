@@ -44,7 +44,8 @@ class SearchResultsView(generic.ListView):
                 Q(recipe_description__icontains=query) |
                 Q(recipe_ingredients__icontains=query) |
                 Q(recipe_equipment__icontains=query) |
-                Q(recipe_instructions__icontains=query)
+                Q(recipe_instructions__icontains=query) |
+                Q(user_name__icontains=query)
             )
             return object_list
 
