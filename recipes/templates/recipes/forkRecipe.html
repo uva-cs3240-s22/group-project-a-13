@@ -5,7 +5,7 @@
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
     {% csrf_token %}
 
-
+<!-- Username (hidden) -->
     <div>
         <label hidden for="user_name">User name: </label>
         <input hidden id="user_name" type="text" name="user_name" value = {{request.user}}>
@@ -18,6 +18,15 @@
         <input id="recipe_name" type="text" name="recipe_name" value = "{{recipe.recipe_name}}">
     </div>
     <br>
+
+<!-- Time input -->
+<div>
+    <label for="recipe_time">Recipe Time (in minutes): </label>
+    <input id="recipe_time" type="number" name="recipe_time" value = "{{recipe.recipe_time}}">
+</div>
+<br>
+
+
 
 <!-- Description input -->
 <div>
