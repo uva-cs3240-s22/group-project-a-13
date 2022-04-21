@@ -28,9 +28,72 @@
         font-size: xx-large;
         border-bottom: 2px solid red;
     }
+
+    .open-filters {
+        border: 2px solid grey;
+    }
+
+    .open-filters:hover{
+        border: 2px solid black;
+    }
+
+    #sidebar{
+          height:100%;
+          min-width: 300px;
+          max-width: 300px;
+          position: fixed;
+          z-index:1;
+          top:0;
+          left:0;
+          background-color: white;
+          overflow-x: hidden;
+          padding:20px 0px 20px 20px;
+          text-align: left;
+          transition: all 0.3s;
+          left: -30%;
+          border-right: 2px solid gray;
+      }
+
+      #sidebar.active{
+          left: 0;
+      }
+ 
+      #sidebarOpen {
+          float: left;
+      }
+ 
+      #sidebarCollapse {
+          float: right;
+      }
+
+      .filters li {
+          list-style-type: none;
+          padding: 10px;
+      }
+
+      .form-check-input {
+        box-shadow:none !important;
+      }
+
+      .apply-filters {
+        text-align: center;
+        border: 2px solid grey;
+    }
+
+    .apply-filters:hover{
+        border: 2px solid black;
+    }
+
 </style>
 
 <body>
+    <div style="float: left; margin-bottom: 20px;">
+        <button class = "btn open-filters shadow-none" type = "button" id = "sidebarOpen" onclick= "toggleMenu()">Apply Filters</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
 
     <div class = "container">
         {% for recipe in recipelist %}
@@ -52,6 +115,125 @@
             <p>No recipes posted yet :(</p>
         {% endfor %}
     </div>
+
+
+     
+    <!--- HIDDEN SIDE NAVBAR --->
+    <div class = "wrapper me-auto">
+        <aside class = "nav-sidebar" id = "sidebar">
+  
+            <button class = "btn shadow-none" type = "button" id = "sidebarCollapse" onclick="toggleMenu()">
+                <i class="bi bi-x" style="font-size: 2rem; color:grey;"></i>
+            </button>
+            <h2>Filters</h2>
+            <br>
+            <div class="filters">
+                <ul>
+                    <li>
+                        <h4>Meal</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Breakfast
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Snack
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Lunch
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Dinner
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Dessert
+                            </label>
+                          </div>
+                    </li>
+                    <li>
+                        <h4>Dieaty Restrictions</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Vegan
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Vegetarian
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Gluten-Free
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Nut-Free
+                            </label>
+                          </div>
+                    </li>
+                    <li>
+                        <h4>Cook Time</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              5 to 15 minutes
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                15 to 30 minutes
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              30 minutes to an hour
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Over an hour
+                            </label>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center">
+                <button class = 'btn shadow-none apply-filters'>Apply Filters</button>
+            </div>
+           
+         
+        </aside>
+        </div>
+  
+        <script type = "text/javascript">
+            function toggleMenu(){
+                document.getElementById('sidebar').classList.toggle('active');
+  
+            }
+        </script>
 
     </body>
 </html>
