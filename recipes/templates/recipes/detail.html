@@ -113,11 +113,12 @@
                 
                 var num;
                 var display_split_strings = '';
-
+                var cnt = 1;
                 for (num=0; num < str_spl.length; num++){
-                    if(num == str_spl.length - 1) {
-                    } else {
-                        display_split_strings += num+1 + ". " + str_spl[num] + "<BR>";
+                    var curr = str_spl[num].trim();
+                    if(curr.length > 0){
+                        display_split_strings += cnt + ". " + str_spl[num] + "<BR>";
+                        ++cnt;
                     }
                 }
 
