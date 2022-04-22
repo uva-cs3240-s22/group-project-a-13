@@ -93,14 +93,37 @@
                     {% endfor %}
                 </ul> -->
             <h3>Instructions: </h3>
-            <input type="checkbox" id="vehicle1" name="vehicle1">
-            <label for="vehicle1" width = "400px">{{ recipe.recipe_instructions }}</label><br>
+            <label id = "reci" for="vehicle1" width = "400px">{{ recipe.recipe_instructions }}</label><br>
             <!-- <h3>Instruction List: </h3>
             <ul>
                 {% for ri in recipe.recipeinstruction_set.all %}
                     <li>{{ ri.instruction_text }}</li>
                 {% endfor %}
             </ul> -->
+      
+            <h1 hidden id="rec">
+                {{ recipe.recipe_instructions }}
+            </h1>
+            <script type="text/javascript">
+                var temp = document.getElementById("rec");
+                
+                var newTemp = temp.innerHTML;
+
+                var str_spl = newTemp.split('.');
+                
+                var num;
+                var display_split_strings = '';
+
+                for (num=0; num < str_spl.length; num++){
+                    if(num == str_spl.length - 1) {
+                    } else {
+                        display_split_strings += num+1 + ". " + str_spl[num] + "<BR>";
+                    }
+                }
+
+                document.getElementById("reci").innerHTML = display_split_strings;
+
+            </script>
         </div>
     </ul>
 
