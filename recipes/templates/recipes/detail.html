@@ -17,6 +17,26 @@
            word-break:break-all;
            width: 100px;
        }
+       #name{
+           display: inline-block;
+           padding-right: 25px;
+       }
+       #time{
+           display: inline-block;
+           border-left: 1px solid #000;
+           padding-left: 25px;
+       }
+
+       #forkimage{
+            display: inline-block;
+            float: left;
+       }
+       #fork{
+            display: inline-block;
+            overflow: hidden;
+       }
+
+
 </style>
 
 
@@ -24,7 +44,7 @@
 
     <ul style = "display: inline-block; width: 100%;">
         <div style="float: left">
-            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "575" height = "415" />
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "460" />
             <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
@@ -37,26 +57,37 @@
             <h1 class = "font-weight-bold">
                     {{ recipe.recipe_name }}
             </h1>
-            <button onClick="window.print()">Print/Save this recipe</button>
-            <h6>Time: {{ recipe.recipe_time }} </h6>
 
-            <h3>Description: </h3>
+            <div>
+                <div id="name">
+                    <p style="margin-top: 5px;">By {{recipe.user_name}} </p>
+                </div>
+                <div id="time">
+                    <h6>Time: {{ recipe.recipe_time }} </h6>
+                </div>
+            </div>
+
+
+            <h3><u>Description: </u></h3>
             <p>{{ recipe.recipe_description }}</p>
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
 
-            <div style = "display: inline-block; width: 100%;">
-                <div style="display:float-left">
+            <div>
+                <div id="forkimage">
                     <a href = "{% url 'fork' recipe.id %}"><img src="{% static 'recipes/images/fork-logo.jpeg' %}"style="max-width:15%;" ></a>
                 </div>
-                <div style="color: #D2042D;">
-                    <p>Fork this recipe</p>
+                <div id="fork">
+                    <p style="color: red;">Fork this recipe</p>
                 </div>
+
             </div>
 
             {% if recipe.recipe_reference %}
                 <a href = "{% url 'detail' recipe.recipe_reference %}">Forked! View the original recipe here</a>
             {% endif %}
+
+            <button onClick="window.print()">Print/Save this recipe</button>
         </div>
 
     </ul>
@@ -66,9 +97,38 @@
 
     <ul id = "recipe-info" style = "display: inline-block; width: 100%;">
         <div class = "split" style="float: left; width: 400px;">
-            <h3>Equipment: </h3>
-            {{ recipe.recipe_equipment }}
-            <h3>Ingredients: </h3>
+            <h3><u>Equipment: </u></h3>
+
+            <label id = "equipment" for="vehicle1" width = "400px"> {{ recipe.recipe_equipment }}</label><br>
+
+            <h1 hidden id="equip">
+                {{ recipe.recipe_equipment }}
+            </h1>
+
+            <script type="text/javascript">
+                var temp_e = document.getElementById("equip");
+
+                var newTemp_e = temp_e.innerHTML;
+
+                var str_split_e = newTemp_e.split(',');
+
+                var num;
+                var display_split_e = '';
+
+                for (num=0; num < str_split_e.length; num++){
+                    var curr_e = str_split_e[num].trim();
+                    if(curr_e.length > 0){
+                        display_split_e += "-  "+str_split_e[num] + "<BR>";
+                    }
+                }
+
+                document.getElementById("equipment").innerHTML = display_split_e;
+
+            </script>
+
+
+
+            <h3><u>Ingredients: </u></h3>
             {{ recipe.recipe_ingredients }}
             <br>
             {% if request.user.username == recipe.user_name %}
@@ -92,7 +152,7 @@
                         <li>{{ ri.instruction_text }}</li>
                     {% endfor %}
                 </ul> -->
-            <h3>Instructions: </h3>
+            <h3><u>Instructions: </u></h3>
             <label id = "reci" for="vehicle1" width = "400px">{{ recipe.recipe_instructions }}</label><br>
             <!-- <h3>Instruction List: </h3>
             <ul>
