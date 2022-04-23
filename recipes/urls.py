@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from .views import SearchResultsView
 
 urlpatterns = [
-    path('', views.homeListView.as_view(), name = 'homepage'),
+    path('', views.homepage, name = 'homepage'),
     path('form/', views.index, name = 'index'),
     path('<int:recipe_id>/', views.detail, name = 'detail'),
     path('success/', views.result ,name = 'success'),

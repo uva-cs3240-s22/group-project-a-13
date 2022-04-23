@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from pyrsistent import optional
 
 class Recipe(models.Model):
     
@@ -18,8 +19,16 @@ class Recipe(models.Model):
     ('dinner', "Dinner"),
     ('dessert', "Dessert"),
     ]
-    recipe_time = models.CharField(max_length=30, default='5-15', choices=TIME_CHOICES,)
-    recipe_type = models.CharField(max_length=10, default='breakfast', choices=TYPE_CHOICES,)
+
+    DIET_CHOICES = [
+        ('vegan', 'Vegan'),
+        ('vegetarian', 'Vegetarian'), 
+        ('gluten-free', 'Gluten-Free'), 
+        ('nut-free', "Nut-Free"),
+    ]
+    recipe_time = models.CharField(max_length=30, choices=TIME_CHOICES,)
+    recipe_type = models.CharField(max_length=10, choices=TYPE_CHOICES, blank=True,)
+    recipe_diet = models.CharField(max_length=30, choices=DIET_CHOICES, blank=True,)
 
     recipe_name = models.CharField(max_length = 50, default = '')
     recipe_description = models.CharField(max_length=1000, default = '')

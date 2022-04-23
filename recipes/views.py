@@ -1,3 +1,4 @@
+from multiprocessing import context
 from reprlib import recursive_repr
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
@@ -8,11 +9,15 @@ from .forms import RecipeForm
 from django.views.generic import TemplateView, ListView
 import boto3
 from django.db.models import Q # new
+from .filters import RecipeFilter
 
-class homeListView(generic.ListView):
-    model = Recipe
-    template_name = 'recipes/homepage.html'
-    context_object_name = 'recipelist'
+def homepage(request):
+    recipelist = Recipe.objects.all()
+    myFilter = RecipeFilter(request.GET, queryset=recipelist)
+    recipelist = myFilter.qs
+
+    context = {'recipelist':recipelist, 'myFilter': myFilter}
+    return render(request, 'recipes/homepage.html', context)
 
 def index(request):
     if request.method == 'POST':
