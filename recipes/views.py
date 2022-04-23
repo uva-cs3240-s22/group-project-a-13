@@ -18,6 +18,13 @@ def index(request):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
+            '''''
+            if not recipe_form.data('recipe_image'):
+                new_recipe = recipe_form.save(commit=False)
+                new_recipe.recipe_image = recipe.recipe_image
+                new_recipe.save()
+            else:
+            '''
             recipe_form.save()
             return HttpResponseRedirect(reverse('success'))
     else:
@@ -90,8 +97,8 @@ def fork(request, recipe_id):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
-            '''
-            if not recipe_form.cleaned_data('recipe_image'):
+            '''''
+            if not recipe_form.data('recipe_image'):
                 new_recipe = recipe_form.save(commit=False)
                 new_recipe.recipe_image = recipe.recipe_image
                 new_recipe.save()

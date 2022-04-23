@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'storages',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -176,7 +177,7 @@ AWS_S3_SECRET_ACCESS_KEY = 'ms2pQDSst0lYuA+TAVyltYLcSLK+v7LIyMKyyF8C'
 AWS_STORAGE_BUCKET_NAME = 'wordofmouth-images'
 AWS_QUERYSTRING_AUTH = False
 
-SITE_ID = 7
+SITE_ID = 8
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

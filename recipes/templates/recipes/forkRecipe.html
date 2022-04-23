@@ -11,7 +11,6 @@
         <input hidden id="user_name" type="text" name="user_name" value = {{request.user}}>
     </div>
 
-
 <!-- Name input -->
     <div>
         <label for="recipe_name">Recipe Name: </label>
@@ -22,7 +21,14 @@
 <!-- Time input -->
 <div>
     <label for="recipe_time">Recipe Time (in minutes): </label>
-    <input id="recipe_time" type="number" name="recipe_time" value = "{{recipe.recipe_time}}">
+    <input id="recipe_time" name="recipe_time" value = "{{recipe.recipe_time}}">
+</div>
+<br>
+
+<!-- Type input -->
+<div>
+    <label for="recipe_type">Recipe Type: </label>
+    <input id="recipe_type" name="recipe_type" value = "{{recipe.recipe_type}}">
 </div>
 <br>
 
