@@ -9,14 +9,14 @@ from .forms import RecipeForm
 from django.views.generic import TemplateView, ListView
 import boto3
 from django.db.models import Q # new
-from .filters import RecipeFilter
+#from .filters import RecipeFilter
 
 def homepage(request):
     recipelist = Recipe.objects.all()
-    myFilter = RecipeFilter(request.GET, queryset=recipelist)
-    recipelist = myFilter.qs
+    #myFilter = RecipeFilter(request.GET, queryset=recipelist)
+    #recipelist = myFilter.qs
 
-    context = {'recipelist':recipelist, 'myFilter': myFilter}
+    context = {'recipelist':recipelist}
     return render(request, 'recipes/homepage.html', context)
 
 def index(request):
