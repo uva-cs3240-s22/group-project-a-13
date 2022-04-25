@@ -49,7 +49,10 @@
                 {% csrf_token %}
                 <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
                 <br>
+                {% if request.user.username == recipe.user_name %}
                 <input type = "submit" value = "Update Image">
+                {% else %}
+                {% endif %}
             </form>
         </div>
 
