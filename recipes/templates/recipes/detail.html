@@ -133,12 +133,41 @@
 
 
             <h3><u>Ingredients: </u></h3>
-            {{ recipe.recipe_ingredients }}
+
+             <label id = "ingredient" for="vehicle1" width = "400px"> {{ recipe.recipe_ingredients }}</label><br>
+
+            <h1 hidden id="ingred">
+                {{ recipe.recipe_ingredients }}
+            </h1>
+
+            <script type="text/javascript">
+                var temp_i = document.getElementById("ingred");
+
+                var newTemp_i = temp_i.innerHTML;
+
+                var str_split_i = newTemp_i.split(',');
+
+                var num;
+                var display_split_i = '';
+
+                for (num=0; num < str_split_i.length; num++){
+                    var curr_i = str_split_i[num].trim();
+                    if(curr_i.length > 0){
+                        display_split_i += str_split_i[num] + "<BR>";
+                    }
+                }
+
+                document.getElementById("ingredient").innerHTML = display_split_i;
+
+            </script>
+
             <br>
+
             {% if request.user.username == recipe.user_name %}
                 <a href = "{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
             {% else %}
             {% endif %}
+
             <form action="{% url 'favorite_recipe' %}" method="post">
                 {% csrf_token %}
                 {% if is_favorited %}

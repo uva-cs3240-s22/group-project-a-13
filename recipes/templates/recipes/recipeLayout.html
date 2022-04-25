@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<style type = 'text/css'>
+    #name_id{
+        width:600px;
+    }
+    #description_id{
+        width:600px;
+    }
+    #ingredients_id{
+        width:600px;
+    }
+    #equipment_id{
+        width:600px;
+    }
+    #instruction_id{
+        width:600px;
+    }
+</style>
+
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
     {% csrf_token %}
 
@@ -12,12 +30,14 @@
 
 <!-- Name input -->
     <div>
-        <label for="recipe_name">Recipe Name: </label>
-        <input id="recipe_name" type="text" name="recipe_name">
+        <div class="form-group" id="name_id">
+            <label for="recipe_name">Recipe Name: </label>
+            <input id="recipe_name" type="text" class="form-control" name="recipe_name">
+        </div>
     </div>
-    <br>
 
-<!-- Time input 
+
+<!-- Time input
     <div>
         <label for="recipe_time">Recipe Time (in minutes): </label>
         <input id="recipe_time" name="recipe_time">
@@ -36,29 +56,39 @@
 
 <!-- Description input -->
 <div>
-    <label for="recipe_description">Recipe Description: </label>
-    <textarea form = "recipeform" id = "recipe_description" name="recipe_description" cols="40" rows="2"></textarea>
+     <div class="form-group" id="description_id">
+        <label for="recipe_description">Description: </label>
+        <textarea form = "recipeform" id = "recipe_description" class="form-control" name="recipe_description" cols="40" rows="2"></textarea>
+     </div>
 </div>
-<br>
 
 <!-- Ingredient input -->
     <div>
-        <label for="recipe_ingredients">Recipe Ingredients: </label>
-        <textarea form = "recipeform" id = "recipe_ingredients" name="recipe_ingredients" cols="40" rows="2"></textarea>
+        <div class="form-group" id="ingredients_id">
+            <label for="recipe_ingredients">Ingredients: </label>
+            <textarea form = "recipeform" id = "recipe_ingredients" class = "form-control" name="recipe_ingredients" cols="40" rows="2"
+                      placeholder="Ex. 3 cups flour, 1 pound cheese"></textarea>
+            <small id="ingredHelp" class="form-text text-muted">Separate by comma ' , '</small>
+        </div>
     </div>
-    <br> 
 
 <!-- Equipment input -->
  <div>
-    <label for="recipe_equipment">Recipe Equipment (separated by ','): </label>
-        <textarea form = "recipeform" id = "recipe_equipment" name="recipe_equipment" cols="40" rows="2"></textarea>
+     <div class="form-group" id="equipment_id">
+        <label for="recipe_equipment">Equipment: </label>
+            <textarea form = "recipeform" id = "recipe_equipment" class="form-control" name="recipe_equipment" cols="40" rows="2"
+                placeholder="Ex. pans, pot"></textarea>
+         <small id="equipHelp" class="form-text text-muted">Separate by comma ' , '</small>
+     </div>
 </div>
-    <br> 
 
 <!-- Instruction input -->
-     <div class = "labels">
-        <label for="recipe_instructions">Recipe Instructions (separated by '.'): </label>
-        <textarea form = "recipeform" id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5"></textarea>
+    <div class="form-group" id="instruction_id">
+         <div class = "labels">
+            <label for="recipe_instructions">Instructions: </label>
+            <textarea form = "recipeform" id = "recipe_instructions" class = "form-control" name="recipe_instructions" cols="40" rows="5"></textarea>
+             <small id="instructHelp" class="form-text text-muted">Separate by period ' . '</small>
+        </div>
     </div>
     <br> 
 
