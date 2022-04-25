@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from pyrsistent import optional
 
 class Recipe(models.Model):
     
+    '''''
     TIME_CHOICES= [
     ('5-15', '5 to 15 minutes'),
     ('15-30', '15 to 30 minutes'),
@@ -30,6 +30,8 @@ class Recipe(models.Model):
     recipe_type = models.CharField(max_length=10, choices=TYPE_CHOICES, blank=True,)
     recipe_diet = models.CharField(max_length=30, choices=DIET_CHOICES, blank=True,)
 
+    '''
+
     recipe_name = models.CharField(max_length = 50, default = '')
     recipe_description = models.CharField(max_length=1000, default = '')
     recipe_ingredients = models.CharField(max_length = 500, default = '')
@@ -37,7 +39,6 @@ class Recipe(models.Model):
     recipe_instructions = models.CharField(max_length = 1000, default = '')
     recipe_image = models.ImageField(default='', upload_to='media/', blank = True)
     recipe_reference = models.IntegerField(default = 0, null = True)
-    #recipe_diet = models.CharField(max_length = 10, default = '')
     favorites = models.ManyToManyField(User, related_name="favorites", blank=True)
     user_name = models.CharField(max_length = 50, default = '')
    
