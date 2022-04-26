@@ -88,7 +88,7 @@
        box-shadow: none;
        }
  
-      #search-icon:hover {
+      .search-btn:hover {
           color: black;
       }
 
@@ -107,6 +107,52 @@
        height: 100%;
        margin-bottom: 50px;
       }
+
+    .popup-background {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        z-index: 5000;
+    }
+    
+        .popup-body {
+            background-color: white;
+            z-index: 6000;
+            position: fixed;
+            margin-left: 40vh;
+            margin-top: 30vh;
+            height: 200px;
+            width: 800px;
+            border:1px solid gray;
+            border-radius: 10px;
+        }
+
+        .search-form {
+            position: relative;
+            margin-top: 75px;
+            transform: translateX(-150px);
+
+        }
+
+        .search-button {
+            float: right;
+            transform: translateY(-170px);
+            padding: 5px;
+        }
+
+        #popup {
+            display: none;
+            transition-delay: 3s;
+            transition-timing-function: ease-in;
+        }
+
+        #popup.active {
+            display:contents;
+            transition-timing-function: ease-out;
+        }
 
    </style>
  
@@ -154,37 +200,32 @@
 
                 </li>
                 <li>
-                <a href="/recipes/search"><i class="search-icon bi bi-search" style = "color:darkgray; float: right; margin-right: 25px; top: 0; font-size: larger;"></i></i></a>
+                    <button class = "btn search-btn" style = "float: right; height: 25px; transform: translateY(-7px);" onclick="toggleSearch()">
+                        <i class="search-icon bi bi-search" style = "color:darkgray; float: right; margin-right: 25px; top: 0; font-size: larger;"></i>
+                    </button>
                 </li>
             </ul>
         </div>
     </nav>
 
-<!-- </head>
-<body class = 'd-flex flex-column min-vh-100' style="position: relative;">
- 
-   <div style = "display: inline-block; width: 100%; position: fixed; top: 0; margin-bottom: 25px; z-index: 1;">
-       <nav class="navbar navbar-expand-lg" style = "background-color:white">
-           <div class = "mx-auto">
-               <button type = "button" id = "sidebarOpen" class = "btn shadow-none" onclick= "toggleMenu()">
-                   <i class = "bi bi-list icon-menu" style="font-size: 3rem; color: darkgray;"></i>
-               </button>
-           </div>
-           <div class = "text-center mx-auto">
-              <a id="navbar-brand" href="/recipes">Word of Mouth</a>
-           </div style>
-           {% load socialaccount %}
-           {% if user.is_authenticated %}
-               <p style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Welcome, {{ user.username }}</p>
-            {% else %}
-                <a href="{% provider_login_url 'google' %}" id = "login" style= "padding-right: 30px; text-decoration: none; color:darkgray; font-size: larger;">Sign In</a>
-            {% endif %}
-           <div class = "right-nav mx-auto">
-           <a href="/recipes/search"><i class="bi bi-search fa-5x" style="font-size: 2rem; color:darkgray;"></i></i></a>
-       </div>
-        </nav>
- 
-   </div>-->
+<div class="search-popup" id = "popup">
+    <div class = 'popup-background'></div>
+    <div class="popup-body">
+        <div class = 'search form-outline' style="width: auto; margin: auto; margin-left: 45vh;">
+            <form class = 'form-inline search-form' action = "{% url 'search' %}" method = "get" enctype="multipart/form-data" id="searchrecipeform" style="margin-bottom: 50px;">
+            {% csrf_token %}
+            <input class = 'form-control span6 input-large shadow-none' type="search" placeholder="Find a recipe" name="search" style="width:350px;">
+            <button class = 'btn btn-outline-dark' type="submit" style = 'margin-left: 5px;'><i class="fa fa-search"></i></button>
+            </form>
+            
+            <button class = "btn shadow-none search-button" type = "button" id = "sidebarCollapse" onclick="toggleSearch()">
+                <i class="bi bi-x" style="font-size: 2rem; color:grey;"></i>
+            </button>
+
+        </div>
+        
+    </div>
+</div>
 
  
  
@@ -206,6 +247,14 @@
       </footer>
       <!-- Footer -->
    </div>
+
+
+   <script type = "text/javascript">
+    function toggleSearch(){
+        document.getElementById('popup').classList.toggle('active');
+
+    }
+</script>
  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
