@@ -47,9 +47,12 @@
             <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "460" />
             <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
                 {% csrf_token %}
+                {% if request.user.username == recipe.user_name %}
                 <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
                 <br>
                 <input type = "submit" value = "Update Image">
+                {% else %}
+                {% endif %}
             </form>
         </div>
 
