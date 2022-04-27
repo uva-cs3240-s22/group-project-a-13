@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Recipe(models.Model):
     
-    '''''
+   
     TIME_CHOICES= [
     ('5-15', '5 to 15 minutes'),
     ('15-30', '15 to 30 minutes'),
@@ -26,11 +26,9 @@ class Recipe(models.Model):
         ('gluten-free', 'Gluten-Free'), 
         ('nut-free', "Nut-Free"),
     ]
-    recipe_time = models.CharField(max_length=30, choices=TIME_CHOICES,)
+    recipe_time = models.CharField(default='5-15', max_length=30, choices=TIME_CHOICES,)
     recipe_type = models.CharField(max_length=10, choices=TYPE_CHOICES, blank=True,)
     recipe_diet = models.CharField(max_length=30, choices=DIET_CHOICES, blank=True,)
-
-    '''
 
     recipe_name = models.CharField(max_length = 50, default = '')
     recipe_description = models.CharField(max_length=1000, default = '')

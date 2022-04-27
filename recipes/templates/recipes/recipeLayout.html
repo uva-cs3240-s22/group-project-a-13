@@ -18,6 +18,10 @@
     #instruction_id{
         width:600px;
     }
+    
+    .select {
+        width: 600px;
+    }
 </style>
 
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
@@ -37,22 +41,48 @@
     </div>
 
 
-<!-- Time input
-    <div>
-        <label for="recipe_time">Recipe Time (in minutes): </label>
-        <input id="recipe_time" name="recipe_time">
+<!-- Time input-->
+    <div class="form-group select">
+        <label for="recipe_time">Recipe Time: </label>
+        <select class = 'form-select shadow-none' name="recipe_time" id="recipe_time">
+            <option value=""></option>
+            <option value="5-15">5 to 15 minutes</option>
+            <option value="15-30">15 to 30 minutes</option>
+            <option value="30-60">30 minutes to an hour</option>
+            <option value="60+">Over an hour</option>
+        </select>
     </div>
     <br>
 
--->
 
-<!-- Type input 
-    <div>
-        <label for="recipe_type">Recipe Type: </label>
-        <input id="recipe_type" name="recipe_type">
+
+<!-- Type input -->
+    <div class="form-group select">
+        <label for="recipe_type ">Recipe Type: </label>
+        <select class = 'form-select shadow-none' name="recipe_type" id="recipe_type">
+            <option value=""></option>
+            <option value="breakfast">Breakfast</option>
+            <option value="snack">Snack</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="dessert">Dessert</option>
+        </select>
     </div>
     <br>
--->
+
+<!-- Diet input -->
+<div class="form-group select">
+    <label for="recipe_diet">Recipe Diet: </label>
+    <select class = 'form-select shadow-none' name="recipe_diet" id="recipe_diet">
+        <option value=""></option>
+        <option value="vegan">Vegan</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="gluten-free">Gluten-free</option>
+        <option value="nute-free">Nut-free</option>
+    </select>
+</div>
+<br>
+
 
 <!-- Description input -->
 <div>
@@ -111,6 +141,7 @@
 
   <!-- Submit button -->
   <button type="submit" class="btn btn-primary">Publish Recipe</button>
+
 
 </form>
 

@@ -2,6 +2,12 @@
 
 {% block content %}
 
+<style>
+    .form-select {
+        width: 600px;
+    }
+</style>
+
 <form action = "{% url 'index' %}" method = "post" enctype="multipart/form-data" id="recipeform">
     {% csrf_token %}
 
@@ -12,30 +18,54 @@
     </div>
 
 <!-- Name input -->
-    <div>
+    <div class = 'form-group'>
         <label for="recipe_name">Recipe Name: </label>
         <input id="recipe_name" type="text" name="recipe_name" value = "{{recipe.recipe_name}}">
     </div>
     <br>
 
-    '
-<!-- Time input 
-<div>
+
+<!-- Time input-->
+<div class="form-group">
     <label for="recipe_time">Recipe Time (in minutes): </label>
-    <input id="recipe_time" name="recipe_time" value = "{{recipe.recipe_time}}">
+    <select class = "form-select shadow-none" name="recipe_time" id="recipe_time">
+        <option value=""></option>
+        <option value="5-15">5 to 15 minutes</option>
+        <option value="15-30">15 to 30 minutes</option>
+        <option value="30-60">30 minutes to an hour</option>
+        <option value="60+">Over an hour</option>
+    </select>
 </div>
 <br>
--->
 
-<!-- Type input 
-<div>
+
+
+<!-- Type input -->
+<div class="form-group" id = "type">
     <label for="recipe_type">Recipe Type: </label>
-    <input id="recipe_type" name="recipe_type" value = "{{recipe.recipe_type}}">
+    <select class = "form-select shadow-none" name="recipe_type" id="recipe_type" >
+        <option value=""></option>
+        <option value="breakfast">Breakfast</option>
+        <option value="snack">Snack</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+        <option value="dessert">Dessert</option>
+    </select>
 </div>
 <br>
 
--->
-
+<!-- Diet input -->
+<div class="form-group" id = "diet">
+<label for="recipe_diet">Recipe Diet: </label>
+<select class = "form-select shadow-none" name="recipe_diet" id="recipe_diet">
+    <option value=""></option>
+    <option value="vegan">Vegan</option>
+    <option value="vegetarian">Vegetarian</option>
+    <option value="gluten-free">Gluten-free</option>
+    <option value="nute-free">Nut-free</option>
+</select>
+</div>
+<br>
 
 
 <!-- Description input -->
@@ -60,14 +90,14 @@
     <br>
 
 <!-- Instruction input -->
-    <div class = "labels">
+    <div class = "form-group labels">
         <label for="recipe_instructions">Recipe Instructions: </label>
         <textarea form = "recipeform" id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5">{{recipe.recipe_instructions}}</textarea>
     </div>
     <br>
 
 <!-- Instruction input -->
-    <div class = "labels">
+    <div class = " labels">
         <label hidden for="recipe_reference">Recipe Reference: </label>
         <input hidden type = "number" id = "recipe_reference" name="recipe_reference" value = {{recipe.id}}>
     </div>
@@ -84,5 +114,6 @@
   <!-- Submit button -->
   <button type="submit" class="btn btn-primary">Publish Recipe</button>
 </form>
+
 
 {% endblock %}

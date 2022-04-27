@@ -13,8 +13,16 @@ from django.db.models import Q # new
 
 def homepage(request):
     recipelist = Recipe.objects.all()
-    #myFilter = RecipeFilter(request.GET, queryset=recipelist)
-    #recipelist = myFilter.qs
+    time_query = request.GET.get('recipe_time')
+    type_query = request.GET.get('recipe_type')
+    diet_query = request.GET.get('recipe_diet')
+
+    if time_query != '' and time_query is not None:
+        recipelist = recipelist.filter(recipe_time=time_query)
+    if type_query != '' and type_query is not None:
+        recipelist = recipelist.filter(recipe_type=type_query)
+    if diet_query != '' and diet_query is not None:
+        recipelist = recipelist.filter(recipe_diet=diet_query)
 
     context = {'recipelist':recipelist}
     return render(request, 'recipes/homepage.html', context)
@@ -23,13 +31,6 @@ def index(request):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
-            '''''
-            if not recipe_form.data('recipe_image'):
-                new_recipe = recipe_form.save(commit=False)
-                new_recipe.recipe_image = recipe.recipe_image
-                new_recipe.save()
-            else:
-            '''
             recipe_form.save()
             return HttpResponseRedirect(reverse('success'))
     else:
