@@ -36,11 +36,39 @@
             overflow: hidden;
        }
 
+       .heart-btn, .heart-btn-filled {
+           font-size: 30px;
+           transform: translateY(-5px);
+       }
+
+       .heart-btn:focus, .heart-btn-filled:focus{
+        outline: none;
+        box-shadow: none;
+       }
+
+       .heart-btn:hover {
+           color: red;
+       }
+
+       .heart-btn-filled i:hover {
+           color:pink!important;
+       }
+
+       .fork-btn i {
+           font-size: 25px;
+       }
+
 
 </style>
 
 
 <head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
+
+</head>
+<body>
+    
 
     <ul style = "display: inline-block; width: 100%;">
         <div style="float: left">
@@ -57,9 +85,28 @@
         </div>
 
         <div class="right" class = "split">
-            <h1 class = "font-weight-bold">
-                    {{ recipe.recipe_name }}
-            </h1>
+            <div style="display: inline-block;">
+                <div style="float: left; margin-right: 25px;">
+                    <h1 class = "font-weight-bold">
+                        {{ recipe.recipe_name }}
+                    </h1>
+                </div>
+
+                <div style="float: right;">
+                    <form action="{% url 'favorite_recipe' %}" method="post">
+                        {% csrf_token %}
+                        {% if is_favorited %}
+                            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn-filled" type style = "border: none; color:red;">
+                                <i class="bi bi-heart-fill"></i>
+                            </button>
+                        {% else %}
+                            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn" type style = "border: none;">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
 
             <div>
                 <div id="name">
@@ -80,13 +127,28 @@
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
 
-            <div>
+            <div style="margin-bottom: 15px;">
+                <a href="{% url 'fork' recipe.id %}">
+                    <button class = "btn btn-outline-dark fork-btn" style="width: 180px; height: 38px;">
+                        <i class="fa fa-fork-awesome" aria-hidden="true" style="float: left; margin-right: 5px;"></i>
+                        <p >Fork this recipe</p>
+                    </button>
+                </a>
+                <!--
                 <div id="forkimage">
-                    <a href = "{% url 'fork' recipe.id %}"><img src="{% static 'recipes/images/fork-logo.jpeg' %}"style="max-width:15%;" ></a>
+                         <a href = "{% url 'fork' recipe.id %}">
+                        <div style="display: inline-block; border:1px solid black;">
+                            <div style="float:left;">
+                                <img src="{% static 'recipes/images/fork-logo.jpeg' %}"style="max-width:10%;" >
+                            </div>
+                            <div id="fork" style="float: right;">
+                                <p style="color: red;">Fork this recipe</p>
+                            </div>
+                        </div>
+                    </a>
+                    
                 </div>
-                <div id="fork">
-                    <p style="color: red;">Fork this recipe</p>
-                </div>
+                -->
 
             </div>
 
@@ -94,13 +156,12 @@
                 <a href = "{% url 'detail' recipe.recipe_reference %}">Forked! View the original recipe here</a>
             {% endif %}
 
-            <button class = 'btn btn-outline-dark' onClick="window.print()">Print/Save this recipe</button>
+            <button class = 'btn btn-outline-dark shadow-none' onClick="window.print()">Print/Save this recipe</button>
         </div>
 
     </ul>
     
-</head>
-<body>
+
 
     <ul id = "recipe-info" style = "display: inline-block; width: 100%;">
         <div class = "split" style="float: left; width: 400px;">
@@ -171,14 +232,7 @@
             {% else %}
             {% endif %}
 
-            <form action="{% url 'favorite_recipe' %}" method="post">
-                {% csrf_token %}
-                {% if is_favorited %}
-                    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:gray">Unfavorite</button>
-                {% else %}
-                    <button type="submit" name="recipe_id" value="{{ recipe.id }}" class="btn btn-primary" style="background-color:#D2042D">Favorite</button>
-                {% endif %}
-            </form>
+           
         </div>
 
         <div class = "split" style="white-space: normal; padding-left: 300px; width: 1000px;">
@@ -224,6 +278,7 @@
         </div>
     </ul>
 
+  
 </body>
 </html>
 
