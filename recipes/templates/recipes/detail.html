@@ -93,18 +93,24 @@
                 </div>
 
                 <div style="float: right;">
-                    <form action="{% url 'favorite_recipe' %}" method="post">
-                        {% csrf_token %}
-                        {% if is_favorited %}
-                            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn-filled" type style = "border: none; color:red;">
-                                <i class="bi bi-heart-fill"></i>
-                            </button>
-                        {% else %}
-                            <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn" type style = "border: none;">
-                                <i class="bi bi-heart"></i>
-                            </button>
-                        {% endif %}
-                    </form>
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'favorite_recipe' %}" method="post">
+                            {% csrf_token %}
+                            {% if is_favorited %}
+                                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn-filled" type style = "border: none; color:red;">
+                                    <i class="bi bi-heart-fill"></i>
+                                </button>
+                            {% else %}
+                                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn" type style = "border: none;">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            {% endif %}
+                        </form>
+                    {% else %}
+                        <a class="btn heart-btn" href="{% provider_login_url 'google' %}">
+                             <i class="bi bi-heart"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -128,12 +134,21 @@
             <!-- <a href = "{% url 'edit_description' recipe.id %}">Edit Description</a> -->
 
             <div style="margin-bottom: 15px;">
-                <a href="{% url 'fork' recipe.id %}">
-                    <button class = "btn btn-outline-dark fork-btn" style="width: 180px; height: 38px;">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'fork' recipe.id %}">
+                        <button class = "btn btn-outline-dark fork-btn" style="width: 180px; height: 38px;">
+                            <i class="fa fa-fork-awesome" aria-hidden="true" style="float: left; margin-right: 5px;"></i>
+                            <p >Fork this recipe</p>
+                        </button>
+                    </a>
+                {% else %}
+                    <a class="btn btn-outline-dark fork-btn" style="width: 180px; height: 38px;"
+                       href="{% provider_login_url 'google' %}">
                         <i class="fa fa-fork-awesome" aria-hidden="true" style="float: left; margin-right: 5px;"></i>
                         <p >Fork this recipe</p>
-                    </button>
-                </a>
+                    </a>
+                {% endif %}
+
                 <!--
                 <div id="forkimage">
                          <a href = "{% url 'fork' recipe.id %}">
