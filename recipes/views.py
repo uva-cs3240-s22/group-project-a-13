@@ -208,11 +208,17 @@ def edit_d(request, recipe_id):
         new_equipment = request.POST['equipment']
         new_ingredient = request.POST['ingredient']
         new_instruction = request.POST['instruction']
+        new_time = request.POST['recipe_time']
+        new_type = request.POST['recipe_type']
+        new_diet = request.POST['recipe_diet']
         recipe.recipe_name = new_name
         recipe.recipe_description = new_description
         recipe.recipe_equipment = new_equipment
         recipe.recipe_ingredients = new_ingredient
         recipe.recipe_instructions = new_instruction
+        recipe.recipe_time = new_time
+        recipe.recipe_type = new_type
+        recipe.recipe_diet = new_diet
         recipe.save()
     except Recipe.DoesNotExist:
         raise Http404("Something went wrong")
