@@ -57,6 +57,22 @@
            font-size: 25px;
        }
 
+       .tag {
+           color: white;
+           background-color: #fd5c63;
+           padding: 5px;
+           height: 35px;
+           min-width: 60px;
+           border-radius: 10px;
+           text-align: center;
+           float: right;
+           margin-right: 10px;
+       }
+
+       .tag-type {
+           margin-right: 10px;
+       }
+
 
 </style>
 
@@ -118,14 +134,25 @@
                     <p style="margin-top: 5px;">By {{recipe.user_name}} </p>
                 </div>
                 
-                    <div id="time">
-                    <h6>Time: {{ recipe.recipe_time }} minutes </h6>
+                <div id="time">
+                    <h6 <i class="bi bi-clock""></i> {{recipe.recipe_time }} minutes </h6>
                 </div>
-
-                
-                
             </div>
 
+            <div id ='tags' style="display: inline-table; margin-bottom: 10px;">
+                {% if recipe.recipe_type or recipe.recipe_diet %}
+                <div>
+                    <h6>Attributes:</h6>
+                </div>
+                {% endif %}
+                {% if recipe.recipe_type %}
+                <div class = "tag tag-type" style="float: inline-start;">{{recipe.recipe_type}}</div>
+                {% endif %}
+                
+                {% if recipe.recipe_diet %}
+                <div class = "tag tag-diet" style="float:inline-end">{{recipe.recipe_diet}}</div>
+                {% endif %}
+            </div>
 
             <h3><u>Description: </u></h3>
             <p>{{ recipe.recipe_description }}</p>
