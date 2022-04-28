@@ -241,6 +241,18 @@ def edit_recipe(request, recipe_id):
 def myrecipes(request):
     current_user = request.user
     submitted_recipes = Recipe.objects.filter(user_name=current_user)
+
+    time_query = request.GET.get('recipe_time')
+    type_query = request.GET.get('recipe_type')
+    diet_query = request.GET.get('recipe_diet')
+
+    if time_query != '' and time_query is not None:
+          submitted_recipes =   submitted_recipes.filter(recipe_time=time_query)
+    if type_query != '' and type_query is not None:
+          submitted_recipes =    submitted_recipes.filter(recipe_type=type_query)
+    if diet_query != '' and diet_query is not None:
+          submitted_recipes =   submitted_recipes.filter(recipe_diet=diet_query)
+
     context = {'submitted_recipes': submitted_recipes}
     return render(request, 'recipes/myRecipes.html', context)
 
@@ -248,6 +260,17 @@ def myrecipes(request):
 def favorited_list(request):
     user = request.user
     favorite_recipes = user.favorites.all()
+    time_query = request.GET.get('recipe_time')
+    type_query = request.GET.get('recipe_type')
+    diet_query = request.GET.get('recipe_diet')
+
+    if time_query != '' and time_query is not None:
+        favorite_recipes =  favorite_recipes.filter(recipe_time=time_query)
+    if type_query != '' and type_query is not None:
+        favorite_recipes =  favorite_recipes.filter(recipe_type=type_query)
+    if diet_query != '' and diet_query is not None:
+        favorite_recipes =  favorite_recipes.filter(recipe_diet=diet_query)
+
     context = {'favorite_recipes': favorite_recipes}
     return render(request, 'recipes/favoritedRecipes.html',context)
 
