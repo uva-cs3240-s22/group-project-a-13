@@ -100,14 +100,14 @@
         </div>
 
         <div class="right" class = "split">
-            <div style="display: inline-block;">
-                <div style="float: left; margin-right: 25px;">
-                    <h1 class = "font-weight-bold">
+            <div style="display: flex; max-width: fit-content;">
+                <div style="display: inline-table; margin-right: 25px;">
+                    <h1 class = "font-weight-bold" style="width:fit-content;">
                         {{ recipe.recipe_name }}
                     </h1>
                 </div>
 
-                <div style="float: right;">
+                <div style="display: inline-table;">
                     {% if user.is_authenticated %}
                         <form action="{% url 'favorite_recipe' %}" method="post">
                             {% csrf_token %}
@@ -139,12 +139,16 @@
                 </div>
             </div>
 
+            {% if recipe.recipe_reference %}
+            <div style="margin-top: 10px; margin-bottom: 10px;">
+                <a href = "{% url 'detail' recipe.recipe_reference %}">Forked! View the original recipe here</a>
+            </div>
+            {% endif %}
+
+
+            {% if recipe.recipe_type or recipe.recipe_diet %}
             <div id ='tags' style="display: inline-table; margin-bottom: 10px;">
-                {% if recipe.recipe_type or recipe.recipe_diet %}
-                <div>
-                    <h6>Attributes:</h6>
-                </div>
-                {% endif %}
+                <h6>Attributes:</h6>
                 {% if recipe.recipe_type %}
                 <div class = "tag tag-type" style="float: inline-start;">{{recipe.recipe_type}}</div>
                 {% endif %}
@@ -153,6 +157,7 @@
                 <div class = "tag tag-diet" style="float:inline-end">{{recipe.recipe_diet}}</div>
                 {% endif %}
             </div>
+            {% endif %}
 
             <h3><u>Description: </u></h3>
             <p>{{ recipe.recipe_description }}</p>
@@ -192,10 +197,6 @@
                 -->
 
             </div>
-
-            {% if recipe.recipe_reference %}
-                <a href = "{% url 'detail' recipe.recipe_reference %}">Forked! View the original recipe here</a>
-            {% endif %}
 
             <button class = 'btn btn-outline-dark shadow-none' onClick="window.print()">Print/Save this recipe</button>
         </div>
