@@ -3,6 +3,22 @@
 {% block content %}
 
 <style>
+    #name_id{
+        width:600px;
+    }
+    #description_id{
+        width:600px;
+    }
+    #ingredients_id{
+        width:600px;
+    }
+    #equipment_id{
+        width:600px;
+    }
+    #instruction_id{
+        width:600px;
+    }
+
     .form-select {
         width: 600px;
     }
@@ -18,12 +34,12 @@
     </div>
 
 <!-- Name input -->
-    <div class = 'form-group'>
-        <label for="recipe_name">Recipe Name: </label>
-        <input id="recipe_name" type="text" name="recipe_name" value = "{{recipe.recipe_name}}">
-    </div>
-    <br>
-
+        <div>
+            <div class="form-group" id="name_id">
+                <label for="recipe_name">Recipe Name: </label>
+                <textarea id="recipe_name" name="recipe_name"class="form-control">{{ recipe.recipe_name }}</textarea>
+            </div>
+        </div>
 
 <!-- Time input-->
 <div class="form-group">
@@ -83,6 +99,7 @@
 <br>
 
 <h1 hidden id="diet">{{recipe.recipe_diet}}</h1>
+
 <!-- Diet input -->
 <div class="form-group" id = "diet">
 <label for="recipe_diet">Recipe Diet: </label>
@@ -112,30 +129,39 @@
 
 
 <!-- Description input -->
-<div>
-    <label for="recipe_description">Recipe Description: </label>
-    <textarea form = "recipeform" id = "recipe_description" name="recipe_description" cols="40" rows="2">{{recipe.recipe_description}}</textarea>
-</div>
-<br>
+    <div>
+         <div class="form-group" id="description_id">
+            <label for="recipe_description">Description: </label>
+            <textarea id = "recipe_description" name = "recipe_description"  class="form-control">{{ recipe.recipe_description }}</textarea>
+         </div>
+    </div>
+
+<!-- Equipment input -->
+    <div>
+         <div class="form-group" id="equipment_id">
+            <label for="recipe_equipment">Equipment: </label>
+            <textarea id = "recipe_equipment" name="recipe_equipment" class="form-control">{{ recipe.recipe_equipment }}</textarea>
+             <small id="equipHelp" class="form-text text-muted">Separate by comma ' , '</small>
+         </div>
+    </div>
 
 <!-- Ingredient input -->
     <div>
-        <label for="recipe_ingredients">Recipe Ingredients: </label>
-        <textarea form = "recipeform" id = "recipe_ingredients" name="recipe_ingredients" cols="40" rows="2">{{recipe.recipe_ingredients}}</textarea>
+         <div class="form-group" id="ingredients_id">
+            <label for="recipe_ingredients">Ingredient: </label>
+            <textarea id = "recipe_ingredients" name="recipe_ingredients"
+                      class="form-control">{{ recipe.recipe_ingredients }}</textarea>
+             <small id="ingredientHelp" class="form-text text-muted">Separate by comma ' , '</small>
+         </div>
     </div>
-    <br>
-
-<!-- Equipment input -->
-<div>
-    <label for="recipe_equipment">Recipe Equipment: </label>
-        <textarea form = "recipeform" id = "recipe_equipment" name="recipe_equipment" cols="40" rows="2">{{recipe.recipe_equipment}}</textarea>
-</div>
-    <br>
 
 <!-- Instruction input -->
-    <div class = "form-group labels">
-        <label for="recipe_instructions">Recipe Instructions: </label>
-        <textarea form = "recipeform" id = "recipe_instructions" name="recipe_instructions" cols="40" rows="5">{{recipe.recipe_instructions}}</textarea>
+    <div>
+        <div class="form-group labels" id="instruction_id">
+            <label for="recipe_instructions">Instructions: </label>
+            <textarea id = "recipe_instructions" name = "recipe_instructions" class = "form-control">{{ recipe.recipe_instructions }}</textarea>
+             <small id="instructHelp" class="form-text text-muted">Separate by period ' . '</small>
+        </div>
     </div>
     <br>
 

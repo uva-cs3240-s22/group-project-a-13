@@ -1,22 +1,171 @@
-
 <!DOCTYPE html>
+
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
 <html>
 
+<style type = 'text/css'>
+    #editname_id{
+        width:600px;
+    }
+    #edittime_id{
+        width:600px;
+    }
+    #editdescription_id{
+        width:600px;
+    }
+    #editingredients_id{
+        width:600px;
+    }
+    #editequipment_id{
+        width:600px;
+    }
+    #editinstruction_id{
+        width:600px;
+    }
+    .form-select {
+        width: 600px;
+    }
+
+</style>
 <body>
 
     <form action = "{% url 'edit_d' recipe.id %}" method = "post">
         {% csrf_token %}
-        <h3>Name</h3>
-        <textarea id = "name" name="name" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_name }}</textarea>
-        <h3>Description</h3>
-        <textarea id = "description" name="description" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_description }}</textarea>
-        <h3>Equipment</h3>
-        <textarea id = "equipment" name="equipment" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_equipment }}</textarea>
-        <h3>Ingredients</h3>
-        <textarea id = "ingredient" name="ingredient" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_ingredients }}</textarea>
-        <h3>Instructions</h3>
-        <textarea id = "instruction" name="instruction" value = "{{ this.value }}" cols="40" rows="8">{{ recipe.recipe_instructions }}</textarea>
+
+        <!-- Name input -->
+        <div>
+            <div class="form-group" id="editname_id">
+                <label for="name">Recipe Name: </label>
+                <textarea id="name" name="name" value = "{{ this.value }}" class="form-control">{{ recipe.recipe_name }}</textarea>
+            </div>
+        </div>
+
+        <!-- Time input-->
+        <div class="form-group">
+            <label for="recipe_time">Recipe Time (in minutes): </label>
+            <select class = "form-select shadow-none" name="recipe_time" id="recipe_time">
+                <option value=""></option>
+                <option selected="selected" value="5-15">5 to 15 minutes</option>
+                <option value="15-30">15 to 30 minutes</option>
+                <option value="30-60">30 minutes to an hour</option>
+                <option value="60+">Over an hour</option>
+            </select>
+
+            <h1 hidden id="time">{{recipe.recipe_time}}</h1>
+
+            <script type="text/javascript">
+
+                var temp = document.getElementById("time").innerHTML;
+                var mySelect = document.getElementById('recipe_time');
+
+                for(var i, j = 0; i = mySelect.options[j]; j++) {
+                    if(i.value == temp) {
+                        mySelect.selectedIndex = j;
+                        break;
+                    }
+                }
+                </script>
+
+        </div>
         <br>
+
+        <h1 hidden id="type">{{recipe.recipe_type}}</h1>
+
+        <!-- Type input -->
+        <div class="form-group" id = "type">
+            <label for="recipe_type">Recipe Type: </label>
+            <select class = "form-select shadow-none" name="recipe_type" id="recipe_type" >
+                <option value=""></option>
+                <option selected="selected" value="breakfast">Breakfast</option>
+                <option value="snack">Snack</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="dessert">Dessert</option>
+            </select>
+
+                 <script type="text/javascript">
+
+                var temp = document.getElementById("type").innerHTML;
+                var mySelect = document.getElementById('recipe_type');
+                for(var i, j = 0; i = mySelect.options[j]; j++) {
+                    if(i.value == temp) {
+                        mySelect.selectedIndex = j;
+                        break;
+                    }
+                }
+                </script>
+        </div>
+        <br>
+
+        <h1 hidden id="diet">{{recipe.recipe_diet}}</h1>
+
+        <!-- Diet input -->
+        <div class="form-group" id = "diet">
+        <label for="recipe_diet">Recipe Diet: </label>
+        <select class = "form-select shadow-none" name="recipe_diet" id="recipe_diet">
+            <option value=""></option>
+            <option selected="selected" value="vegan">Vegan</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="gluten-free">Gluten-free</option>
+            <option value="nute-free">Nut-free</option>
+
+                 <script type="text/javascript">
+
+                var temp = document.getElementById("diet").innerHTML;
+                var mySelect = document.getElementById('recipe_diet');
+
+                for(var i, j = 0; i = mySelect.options[j]; j++) {
+                    if(i.value == temp) {
+                        mySelect.selectedIndex = j;
+                        break;
+                    }
+                }
+                </script>
+
+        </select>
+        </div>
+        <br>
+
+        <!-- Description input -->
+        <div>
+             <div class="form-group" id="editdescription_id">
+                <label for="description">Description: </label>
+                <textarea id = "description" name = "description" value = "{{ this.value }}"  class="form-control">{{ recipe.recipe_description }}</textarea>
+             </div>
+        </div>
+
+        <!-- Equipment input -->
+        <div>
+             <div class="form-group" id="editequipment_id">
+                <label for="equipment">Equipment: </label>
+                <textarea id = "equipment" name="equipment" value = "{{ this.value }}"  class="form-control">{{ recipe.recipe_equipment }}</textarea>
+                 <small id="equipHelp" class="form-text text-muted">Separate by comma ' , '</small>
+             </div>
+        </div>
+
+        <!-- Ingredient input -->
+        <div>
+             <div class="form-group" id="editingredients_id">
+                <label for="ingredient">Ingredient: </label>
+                <textarea id = "ingredient" name="ingredient" value = "{{ this.value }}"
+                          class="form-control">{{ recipe.recipe_ingredients }}</textarea>
+                 <small id="ingredientHelp" class="form-text text-muted">Separate by comma ' , '</small>
+             </div>
+        </div>
+
+        <!-- Instruction input -->
+        <div>
+            <div class="form-group" id="editinstruction_id">
+                <label for="instruction">Instructions: </label>
+                <textarea id = "instruction" name = "instruction" class = "form-control">{{ recipe.recipe_instructions }}</textarea>
+                 <small id="instructHelp" class="form-text text-muted">Separate by period ' . '</small>
+            </div>
+        </div>
+        <br>
+
         <input type = "submit" value = "Save">
     </form>
         <a href = "{% url 'detail' recipe.id %}">Cancel</a>
@@ -25,3 +174,4 @@
 
 </body>
 </html>
+{% endblock %}
