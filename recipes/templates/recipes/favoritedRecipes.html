@@ -1,5 +1,5 @@
 {% extends 'recipes/base.html' %}
-
+{% load socialaccount %}
 {% block content %}
 
 <!DOCTYPE html>
@@ -93,6 +93,25 @@
     .form-check-input:checked {
         background-color: gray;
     }
+
+
+    .heart-btn, .heart-btn-filled {
+           font-size: 25px;
+           transform: translateY(-5px);
+       }
+
+       .heart-btn:focus, .heart-btn-filled:focus{
+        outline: none;
+        box-shadow: none;
+       }
+
+       .heart-btn:hover {
+           color: red;
+       }
+
+       .heart-btn-filled i:hover {
+           color:pink!important;
+       }
     </style>
 
 </head>
@@ -117,7 +136,25 @@
                         <h6 <i class="bi bi-clock""></i> {{recipe.recipe_time }} minutes </h6>
                     </div>
                     <div style="float: right">
-                        <!--like button here-->
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'favorite_recipe_card' %}" method="post">
+                            {% csrf_token %}
+                            {% if user in recipe.favorites.all %}
+                                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn-filled" type style = "border: none; color:red;">
+                                    <i class="bi bi-heart-fill"></i>
+                                </button>
+                            {% else %}
+                                <button type="submit" name="recipe_id" value="{{ recipe.id }}" class = "btn heart-btn" type style = "border: none;">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            {% endif %}
+                            
+                        </form>
+                    {% else %}
+                        <a class="btn heart-btn" href="{% provider_login_url 'google' %}">
+                             <i class="bi bi-heart"></i>
+                        </a>
+                    {% endif %}
                     </div>
                 </div>
             </div>    

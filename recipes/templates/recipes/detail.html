@@ -87,7 +87,7 @@
 
     <ul style = "display: inline-block; width: 100%;">
         <div style="float: left">
-            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "460" />
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "460" style="object-fit:cover;"/>
             <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if request.user.username == recipe.user_name %}
@@ -147,7 +147,7 @@
 
 
             {% if recipe.recipe_type or recipe.recipe_diet %}
-            <div id ='tags' style="display: inline-table; margin-bottom: 10px;">
+            <div id ='tags' style="display: inline-table; margin-bottom: 20px;">
                 <h6>Attributes:</h6>
                 {% if recipe.recipe_type %}
                 <div class = "tag tag-type" style="float: inline-start;">{{recipe.recipe_type}}</div>

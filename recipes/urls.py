@@ -26,6 +26,7 @@ urlpatterns = [
     path('myrecipes/', views.myrecipes, name = 'myrecipes'),
     path('favorited_list/', views.favorited_list, name='favorited_list'),
     path('favorite/', views.favorite_recipe, name='favorite_recipe'),
+    path('favorite_recipe_card/', views.favorite_recipe_card, name='favorite_recipe_card'),
     path('<int:instruction_id>/<int:recipe_id>/delete_instruction/', views.delete_instruction, name = 'delete_instruction'),
     path('<int:equipment_id>/<int:recipe_id>/delete_equipment/', views.delete_equipment, name = 'delete_equipment'),
     path('<int:ingredient_id>/<int:recipe_id>/delete_ingredient/', views.delete_ingredient, name = 'delete_ingredient'),

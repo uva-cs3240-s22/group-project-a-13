@@ -25,6 +25,8 @@ def homepage(request):
         recipelist = recipelist.filter(recipe_diet=diet_query)
 
     context = {'recipelist':recipelist}
+
+    
     return render(request, 'recipes/homepage.html', context)
 
 def index(request):
@@ -284,3 +286,14 @@ def favorite_recipe(request):
         recipe.favorites.add(request.user)
         is_favorited = True
     return HttpResponseRedirect(recipe.get_absolute_url())
+
+def favorite_recipe_card(request):
+    recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
+    is_favorited = False
+    if recipe.favorites.filter(id=request.user.id).exists():
+        recipe.favorites.remove(request.user)
+        is_favorited = False
+    else:
+        recipe.favorites.add(request.user)
+        is_favorited = True
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
