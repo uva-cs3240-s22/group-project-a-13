@@ -37,14 +37,14 @@
         <div>
             <div class="form-group" id="name_id">
                 <label for="recipe_name">Recipe Name: </label>
-                <textarea id="recipe_name" name="recipe_name"class="form-control">{{ recipe.recipe_name }}</textarea>
+                <textarea id="recipe_name" name="recipe_name"class="form-control" required>{{ recipe.recipe_name }}</textarea>
             </div>
         </div>
 
 <!-- Time input-->
 <div class="form-group">
     <label for="recipe_time">Recipe Time (in minutes): </label>
-    <select class = "form-select shadow-none" name="recipe_time" id="recipe_time">
+    <select class = "form-select shadow-none" name="recipe_time" id="recipe_time" required>
         <option value=""></option>
         <option selected="selected" value="5-15">5 to 15 minutes</option>
         <option value="15-30">15 to 30 minutes</option>
@@ -75,7 +75,7 @@
 <!-- Type input -->
 <div class="form-group" id = "type">
     <label for="recipe_type">Recipe Type: </label>
-    <select class = "form-select shadow-none" name="recipe_type" id="recipe_type" >
+    <select class = "form-select shadow-none" name="recipe_type" id="recipe_type" required>
         <option value=""></option>
         <option selected="selected" value="breakfast">Breakfast</option>
         <option value="snack">Snack</option>
@@ -132,7 +132,7 @@
     <div>
          <div class="form-group" id="description_id">
             <label for="recipe_description">Description: </label>
-            <textarea id = "recipe_description" name = "recipe_description"  class="form-control">{{ recipe.recipe_description }}</textarea>
+            <textarea id = "recipe_description" name = "recipe_description"  class="form-control" required>{{ recipe.recipe_description }}</textarea>
          </div>
     </div>
 
@@ -140,7 +140,7 @@
     <div>
          <div class="form-group" id="equipment_id">
             <label for="recipe_equipment">Equipment: </label>
-            <textarea id = "recipe_equipment" name="recipe_equipment" class="form-control">{{ recipe.recipe_equipment }}</textarea>
+            <textarea id = "recipe_equipment" name="recipe_equipment" class="form-control" required>{{ recipe.recipe_equipment }}</textarea>
              <small id="equipHelp" class="form-text text-muted">Separate by comma ' , '</small>
          </div>
     </div>
@@ -150,7 +150,7 @@
          <div class="form-group" id="ingredients_id">
             <label for="recipe_ingredients">Ingredient: </label>
             <textarea id = "recipe_ingredients" name="recipe_ingredients"
-                      class="form-control">{{ recipe.recipe_ingredients }}</textarea>
+                      class="form-control" required>{{ recipe.recipe_ingredients }}</textarea>
              <small id="ingredientHelp" class="form-text text-muted">Separate by comma ' , '</small>
          </div>
     </div>
@@ -159,7 +159,7 @@
     <div>
         <div class="form-group labels" id="instruction_id">
             <label for="recipe_instructions">Instructions: </label>
-            <textarea id = "recipe_instructions" name = "recipe_instructions" class = "form-control">{{ recipe.recipe_instructions }}</textarea>
+            <textarea id = "recipe_instructions" name = "recipe_instructions" class = "form-control" required>{{ recipe.recipe_instructions }}</textarea>
              <small id="instructHelp" class="form-text text-muted">Separate by period ' . '</small>
         </div>
     </div>
@@ -176,7 +176,7 @@
     <div>
 
         <label for="recipe_image">Recipe Image: </label>
-        <input id="recipe_image" type="file" accept="image/*" name="recipe_image"/>
+        <input id="recipe_image" type="file" accept="image/*" name="recipe_image" required/>
     </div>
     <br>
 

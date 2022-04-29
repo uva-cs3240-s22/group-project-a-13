@@ -9,6 +9,7 @@ from .forms import RecipeForm
 from django.views.generic import TemplateView, ListView
 import boto3
 from django.db.models import Q # new
+from django.contrib.auth import logout
 #from .filters import RecipeFilter
 
 def homepage(request):
@@ -40,7 +41,11 @@ def index(request):
 
     return render(request, 'recipes/recipeLayout.html', {
             'recipe_form': recipe_form})
-    
+
+def logout_user(request):
+    logout(request)    
+    return HttpResponseRedirect(reverse('homepage'))
+
 # def search(request):
 #     if request.method == 'POST':
 #         recipe = Recipe.objects.get(recipe_name = request.POST)

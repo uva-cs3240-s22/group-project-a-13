@@ -205,7 +205,7 @@
                 {% endif %}
                 <li class = "login-or-out" style="float: right;">
                     {% if user.is_authenticated %}
-                        <a href="/accounts/logout">Log Out</a>
+                        <a href="{% url 'logout_user' %}">Log Out</a>
                     {% else %}
                         <a href="{% provider_login_url 'google' %}" id = "login">Log In</a>
                     {% endif %}

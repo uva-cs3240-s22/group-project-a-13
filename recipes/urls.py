@@ -11,6 +11,7 @@ urlpatterns = [
     path('short/', views.short, name = 'short'),
     path('search/', views.SearchResultsView.as_view(), name = 'search'),
     path('login/', views.login, name = 'login'),
+    path('logout_user/', views.logout_user, name = 'logout_user'),
     path('long/', views.long, name = 'long'),
     path('<int:recipe_id>/fork/', views.fork, name = 'fork'),
     path('<int:recipe_id>/add/', views.add, name = 'add'),
