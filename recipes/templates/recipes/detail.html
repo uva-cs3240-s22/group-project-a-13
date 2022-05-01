@@ -87,7 +87,7 @@
 
     <ul style = "display: inline-block; width: 100%;">
         <div style="float: left">
-            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "460" style="object-fit:cover;"/>
+            <img src="https://wordofmouth-images.s3.us-east-2.amazonaws.com/{{ recipe.recipe_image }}" width = "560" height = "480" style="object-fit:cover;"/>
             <form action = "{% url 'edit_image' recipe.id %}" method = "post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if request.user.username == recipe.user_name %}
@@ -99,7 +99,7 @@
             </form>
         </div>
 
-        <div class="right" class = "split">
+        <div class="right" class = "split" style="width: 1150px">
             <div style="display: flex; max-width: fit-content;">
                 <div style="display: inline-table; margin-right: 25px;">
                     <h1 class = "font-weight-bold" style="width:fit-content;">
@@ -135,7 +135,7 @@
                 </div>
                 
                 <div id="time">
-                    <h6 <i class="bi bi-clock""></i> {{recipe.recipe_time }} minutes </h6>
+                    <h6 <i class="bi bi-clock"></i> {{recipe.recipe_time }} minutes </h6>
                 </div>
             </div>
 
@@ -277,7 +277,7 @@
            
         </div>
 
-        <div class = "split" style="white-space: normal; padding-left: 300px; width: 1000px;">
+        <div class = "split" style="white-space: normal; padding-left: 450px; width:1100px;">
              <!-- <h3>Instruction List: </h3> -->
                 <!-- <ul>
                     {% for ri in recipe.recipeinstruction_set.all %}
