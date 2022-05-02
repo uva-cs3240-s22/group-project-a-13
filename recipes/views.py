@@ -51,6 +51,17 @@ def logout_user(request):
 #         recipe = Recipe.objects.get(recipe_name = request.POST)
 #         return render(request, 'recipes/search.html', {'recipe': recipe})
 
+# ***************************************************************************************
+# *  REFERENCES
+# *  Title: Django Search Tutorial
+# *  Author: Will Vincent
+# *  Date: 4/13/22
+# *  Code version: N/A
+# *  URL: https://learndjango.com/tutorials/django-search-tutorial
+# *  Software License: Django Software Foundation
+# *
+# *
+# ***************************************************************************************
 class SearchResultsView(generic.ListView):
     model = Recipe
     template_name = 'recipes/search.html'
