@@ -36,18 +36,6 @@
   <!-- Load icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-<!-- The form -->
-<div class = 'search form-outline' style="width: auto; margin: auto; margin-left: 45vh;">
-
-  <form class = 'form-inline' action = "{% url 'search' %}" method = "get" enctype="multipart/form-data" id="searchrecipeform" style="margin-bottom: 50px;">
-    {% csrf_token %}
-    <input class = 'form-control span6 input-large shadow-none' type="search" placeholder="Find another recipe" name="search" style="width:350px;">
-    <button class = 'btn btn-outline-dark' type="submit" style = 'margin-left: 5px;'><i class="fa fa-search"></i></button>
-  </form>
-
-</div>
-
     <div class = "container">
         {% for recipe in recipelist %}
             <div class="card" style="width: 18rem;">
